@@ -1,0 +1,29 @@
+:root {
+  --bg-header-footer: #006575;
+}
+
+header {
+  background-color: var(--bg-header-footer);
+  color: #fff;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* This ensures the body is at least the height of the viewport */
+    margin: 0;
+}
+
+main {
+    flex-grow: 1; /* This is the key property */
+    padding: 20px; /* Add some padding for visual spacing */
+}
+
+footer {
+    padding: 20px;
+    background-color: var(--bg-header-footer);
+    color: white;
+    text-align: center;
+}
