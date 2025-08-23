@@ -1,0 +1,21 @@
+portfolio/
+├── assets/
+│   ├── css/
+│   │   ├── base/
+│   │   │   └── reset.css
+│   │   ├── layout/
+│   │   │   └── layout.css
+│   │   ├── components/
+│   │   │   └── card.css
+│   │   └── modules/
+│   │       ├── contact_info.css
+│   │       └── project.css
+│   └── js/
+│       └── app.js
+├── data/
+│   └── data.json
+├── index.html
+├── .gitignore
+├── LICENSE
+├── project_structure.txt
+└── README.md

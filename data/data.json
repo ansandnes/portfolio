@@ -1,0 +1,22 @@
+{
+    "title": "Andreas Sandnes",
+    "subtitle": "Bioinformatics Software Engineer",
+    "professional_summary": "I'm a highly adaptable and solutions-driven Bioinformatics Software Engineer dedicated to accelerating scientific discovery by building and automating robust data pipelines and interactive tools that eliminate processing bottlenecks for biological researchers.",
+    "projects": [
+        {
+            "title": "AutoProcessBCL",
+            "description": "Automated processing of Illumina BCL files for downstream analysis. Github page underway."
+        },
+        {
+            "title": "HLA-Typing Output Handler",
+            "description": "A tool for handling output from the HLA-Typing software HLA-LA. Github page underway."
+        }
+    ],
+    "contact": {
+        "email": "asandnes92@gmail.com",
+        "links": {
+            "github": "https://github.com/ansandnes",
+            "linkedin": "https://www.linkedin.com/in/andreas-sandnes/"
+        }
+    }
+}
