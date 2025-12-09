@@ -1,0 +1,142 @@
+/* =========================================
+   Tailwind base layers
+========================================= */
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   Global resets / smoothing
+========================================= */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================
+   Global design tokens
+========================================= */
+:root {
+  --btn-focus: 0 0 0 4px rgba(16, 185, 129, 0.08);
+  /* subtle emerald halo */
+}
+
+/* =========================================
+   Subtle selection behavior
+========================================= */
+::selection {
+  background: rgba(16, 185, 129, 0.25);
+  /* emerald-500/25 */
+  color: rgb(209, 250, 229);
+  /* emerald-200 */
+}
+
+/* =========================================
+   Minimal button interaction feedback
+   Apply using class="btn-style"
+========================================= */
+.btn-style {
+  transition:
+    transform 120ms cubic-bezier(.2, .9, .2, 1),
+    box-shadow 120ms,
+    opacity 150ms;
+}
+
+.btn-style:active {
+  transform: translateY(0.5px) scale(0.992);
+}
+
+.btn-style:focus-visible {
+  outline: none;
+  box-shadow: var(--btn-focus);
+  border-radius: 0.5rem;
+}
+
+/* =========================================
+   Respect reduced-motion preferences
+========================================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================
+   Smooth focus ring for keyboard users
+========================================= */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+  border-radius: 0.375rem;
+}
+
+/* =========================================
+   Modern scrollbar (non-intrusive)
+========================================= */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* =========================================
+   Image defaults (crisp & centered)
+========================================= */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* =========================================
+   Typography polish
+========================================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.02em;
+}
+
+/* Links maintain subtle vibe */
+a {
+  transition: opacity 150ms ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
