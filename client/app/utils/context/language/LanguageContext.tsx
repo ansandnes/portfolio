@@ -55,7 +55,7 @@ export const translations = {
         },
         chef: {
             title: "Smart Chef Assistant",
-            desc: "Not sure what to have for dinner? Tell AI Chef what you want to cook, and a recipe will be generated and help you feel inspired!",
+            desc: "Not sure what to have for dinner? Hire Andreas and he can use this app to give you suggestions every day!",
             placeholder: "What are you craving today?",
             generate: "Generate",
             instructions: "Instructions",

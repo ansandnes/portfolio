@@ -5,8 +5,9 @@ import { Plus, Trash2, CheckCircle, Circle } from 'lucide-react';
 
 const TodoApp: React.FC = () => {
     const [todos, setTodos] = useState<TodoItem[]>([
-        { id: '1', text: 'Plan dinner for tomorrow', completed: false },
-        { id: '2', text: 'Make your bed', completed: true },
+        { id: '1', text: "Skim through Andreas' resume", completed: true },
+        { id: '2', text: "Read what people say about Andreas", completed: true },
+        { id: '3', text: 'Invite Andreas to a chat with the team', completed: false },
     ]);
     const [input, setInput] = useState('');
 
