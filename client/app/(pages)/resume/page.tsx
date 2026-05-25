@@ -21,6 +21,14 @@ export default function ResumePage() {
 
     const professionalExperience = [
         {
+            role: "Technical System Engineer",
+            company: "Kiona",
+            period: "01/26 - Present",
+            description: [
+                "Overvåket og vedlikeholdt tekniske systemer for å sikre stabil drift av butikk- og byggautomatisering, inkludert feilsøking og rask problemløsning.",
+            ],
+        },
+        {
             role: "Bioinformatiker",
             company: "National Center for Cancer Immune Therapy (CCIT)",
             period: "03/25 - 08/25",
@@ -36,8 +44,8 @@ export default function ResumePage() {
         {
             title: "Frivillig softwareutvikler – Nøytral hjelpeorganisasjon Mat til Gaza",
             description: [
-                "Bygget en nettside for å fremme organisasjonens arbeid og lette donasjoner.",
-                <Link href="https://mattilgaza.github.io/hjemmeside/index.html" className="text-emerald-600 underline" target="_blank"> mattilgaza.github.io (opens new tab)</Link>,
+                "Utvikling og vedlikehold av en nettside for å fremme organisasjonens arbeid og lette donasjoner.",
+                <Link href="https://mattilgaza.vercel.app/" className="text-emerald-600 underline" target="_blank"> mattilgaza.vercel.app (opens new tab)</Link>,
             ],
         },
         {
@@ -90,8 +98,9 @@ export default function ResumePage() {
                         <div className="text-2xl font-bold mb-4">Andreas Sandnes</div>
                         <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">Profil</h3>
                         <p className="text-sm text-slate-700">
-                            Innovativ, nysgjerrig, og løsningsorientert programvareutvikler som løser komplekse problemer og bygger effektive systemer. Samarbeider godt med team for å skape robuste og brukervennlige verktøy.
+                            Teknisk interessert og samarbeidsorientert ingeniør med erfaring innen datakommunikasjon, systemovervåkning og feilsøking. Har jobbet med tekniske anlegg innen retail og byggautomasjon, hvor stabile systemer, tydelig kommunikasjon og raske problemløsninger er avgjørende. Jeg liker å jobbe strukturert og motiveres av å forstå hvordan systemer henger sammen.
                         </p>
+
                     </section>
 
                     <section>

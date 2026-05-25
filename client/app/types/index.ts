@@ -4,6 +4,7 @@ export enum AppRoute {
     EXPERIENCE = '/experience',
     TESTIMONIALS = '/testimonials',
     PROJECTS = '/projects',
+    ENERGY = "ENERGY",
 }
 
 export interface ExperienceItem {
@@ -18,7 +19,8 @@ export interface ExperienceItem {
 export enum MiniAppType {
     TODO = 'todo',
     RECIPE = 'recipe',
-    GENAI = 'genai',
+    // GENAI = 'genai',
+    // ENERGY = 'energy',
 }
 
 export interface TodoItem {

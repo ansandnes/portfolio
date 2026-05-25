@@ -4,8 +4,9 @@ import React, { useState, useMemo } from "react";
 import { MiniAppType } from "../../types";
 import TodoApp from "./apps/TodoApp";
 import RecipeApp from "./apps/RecipeApp";
-import AiChat from "./apps/AiChat";
-import { CheckSquare, Sparkles } from "lucide-react";
+// import AiChat from "./apps/AiChat";
+// import EnergyBillsApp from "./apps/EnergyBillsApp";
+import { CheckSquare, Lightbulb, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const projects: React.FC = () => {
@@ -15,7 +16,8 @@ const projects: React.FC = () => {
         () => ({
             [MiniAppType.TODO]: <TodoApp />,
             [MiniAppType.RECIPE]: <RecipeApp />,
-            [MiniAppType.GENAI]: <AiChat />,
+            // [MiniAppType.GENAI]: <AiChat />,
+            // [MiniAppType.ENERGY]: <EnergyBillsApp />,
         }),
         []
     );
@@ -23,7 +25,8 @@ const projects: React.FC = () => {
     const tabs = [
         { id: MiniAppType.TODO, label: "Todo List", icon: <CheckSquare size={16} /> },
         { id: MiniAppType.RECIPE, label: "Chef Assistant", icon: <CheckSquare size={16} /> },
-        { id: MiniAppType.GENAI, label: "AI Chat", icon: <Sparkles size={16} /> },
+        // { id: MiniAppType.GENAI, label: "AI Chat", icon: <Sparkles size={16} /> },
+        // { id: MiniAppType.ENERGY, label: "Energy Analyzer", icon: <Lightbulb size={16} /> }
     ];
 
     return (
@@ -42,7 +45,7 @@ const projects: React.FC = () => {
                         const isActive = activeApp === tab.id;
                         return (
                             <button
-                                key={tab.id}
+                                key={`tab-${tab.id}`}
                                 onClick={() => setActiveApp(tab.id)}
                                 aria-selected={isActive}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-emerald-400 ${isActive
