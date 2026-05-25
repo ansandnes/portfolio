@@ -14,7 +14,7 @@ export default function ResumePage() {
     };
 
     const technicalSkills = [
-        { category: "Software Utvikling", items: ["Git", "Python", "Dash-Plotly (Flask)", "R", "Bash", "Next.js/React", "AI Vibe-coding", "Flere kommer.."] },
+        { category: "Software Utvikling", items: ["Data kommunikasjon", "Git", "Programmering", "SQL", "KI-agenter", ".."] },
         { category: "Cloud", items: ["High-Performance Computing (Computerome)"] },
         { category: "Bioinformatics", items: ["scRNA-seq (10x Genomics, Seurat)", "DGE (DEseq2, EdgeR)"] },
     ];
@@ -22,7 +22,7 @@ export default function ResumePage() {
     const professionalExperience = [
         {
             role: "Technical System Engineer",
-            company: "Kiona",
+            company: "Kiona AS",
             period: "01/26 - Present",
             description: [
                 "Overvåket og vedlikeholdt tekniske systemer for å sikre stabil drift av butikk- og byggautomatisering, inkludert feilsøking og rask problemløsning.",
