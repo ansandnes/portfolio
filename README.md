@@ -8,14 +8,14 @@ set of interactive "mini-app" demos.
 | Path                | What it is                                                              |
 | ------------------- | --------------------------------------------------------------------- |
 | `web/`              | Next.js 16 (App Router) + React 19 + TypeScript + Tailwind v4 app.    |
-| `server/`           | FastAPI service for the Energy Bill Analyzer (PDF → report). Currently a stub; moves to `services/energy/` and gets a real implementation in a later phase. |
+| `services/energy/`  | FastAPI service for the Energy Bill Analyzer. **Deferred** — stub parsing, not deployed, not called by the app. See its README. |
 | `REBUILD_PLAN.md`   | Architecture analysis and the phased rebuild plan this work follows.  |
 
 ## Prerequisites
 
 - Node.js 22+
 - npm 10+
-- (Only for `server/`) Python 3.11+
+- Python 3.11+ (only for `services/energy/`)
 
 ## Getting started — web
 
@@ -33,6 +33,7 @@ npm run dev                  # http://localhost:3000
 | `npm run dev`         | Start the dev server.                    |
 | `npm run build`       | Production build (also type-checks).     |
 | `npm run start`       | Serve the production build.              |
+| `npm run preview`     | Build, then serve the production build.  |
 | `npm run typecheck`   | `tsc --noEmit` (run after a build).      |
 | `npm run lint`        | ESLint (flat config).                    |
 | `npm run format`      | Prettier write.                          |
@@ -44,25 +45,23 @@ npm run dev                  # http://localhost:3000
 See [`web/.env.example`](web/.env.example). Real values live in `web/.env.local`,
 which is git-ignored.
 
-| Variable              | Scope       | Notes                                             |
-| --------------------- | ----------- | ------------------------------------------------ |
-| `API_KEY_GEMINI`      | server only | Gemini API key. Used by AI route handlers only. |
-| `NEXT_PUBLIC_API_URL` | client      | Energy service base URL (temporary — see plan). |
+| Variable                     | Scope       | Notes                                                    |
+| ---------------------------- | ----------- | ------------------------------------------------------ |
+| `API_KEY_GEMINI`             | server only | Gemini API key. Used by the AI route handlers only.   |
+| `ALLOWED_ORIGINS`            | server only | Extra origins allowed to call the API routes.         |
+| `LOG_LEVEL`                  | server only | `debug` \| `info` \| `warn` \| `error` (default info).|
+| `NEXT_PUBLIC_SITE_URL`       | client      | Canonical URL for metadata / sitemap / robots.        |
+| `NEXT_PUBLIC_ENERGY_ENABLED` | client      | `true` shows the (deferred) Energy Analyzer tab.      |
 
-## Getting started — server (optional)
+## Getting started — services/energy (optional, deferred)
 
-```bash
-cd server
-python -m venv .venv && . .venv/Scripts/activate   # Windows
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
+Not required to run the site. See [`services/energy/README.md`](services/energy/README.md).
 
 ## Deployment
 
 - `web/` → Vercel.
-- `server/` → a container host (Render / Fly). Not yet wired for production; see
-  `REBUILD_PLAN.md` §9 Phase 6 and Phase 9.
+- `services/energy/` → not deployed. When built (REBUILD_PLAN.md §9 Phase 6), it
+  goes on a container host (Render / Fly) behind the Next.js proxy route.
 
 ## Contributing
 

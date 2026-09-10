@@ -17,16 +17,17 @@ import { z } from "zod";
 const serverSchema = z.object({
   /** Google Gemini API key — used only by server-side AI route handlers. */
   API_KEY_GEMINI: z.string().min(1, "API_KEY_GEMINI is required").optional(),
+  /** Base URL of the Python energy service. Reserved for the Phase 6 build path. */
+  ENERGY_SERVICE_URL: z.string().url().optional(),
+  /** Shared secret between the Next proxy and the energy service. Phase 6 build. */
+  ENERGY_SHARED_SECRET: z.string().min(1).optional(),
 });
 
 const clientSchema = z.object({
   /** Canonical site URL for metadata, sitemap and robots. */
   NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
-  /**
-   * Base URL of the Python energy-analysis service. Optional until the Energy
-   * Analyzer feature is enabled (Phase 6).
-   */
-  NEXT_PUBLIC_API_URL: z.string().url().optional(),
+  /** "true" enables the Energy Analyzer tab. Deferred in Phase 6 — default off. */
+  NEXT_PUBLIC_ENERGY_ENABLED: z.enum(["true", "false"]).optional(),
 });
 
 export type ServerEnv = z.infer<typeof serverSchema>;
@@ -64,5 +65,6 @@ export function parseClientEnv(source: Record<string, string | undefined>): Clie
 }
 
 export const clientEnv: ClientEnv = parseClientEnv({
-  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  NEXT_PUBLIC_ENERGY_ENABLED: process.env.NEXT_PUBLIC_ENERGY_ENABLED,
 });

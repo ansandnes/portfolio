@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { MiniAppType } from "@/app/types";
+import { isEnergyEnabled } from "@/lib/features";
 import TodoApp from "./_apps/TodoApp";
 import RecipeApp from "./_apps/RecipeApp";
 import AiChatApp from "./_apps/AiChatApp";
@@ -25,7 +26,10 @@ const Projects: React.FC = () => {
     { id: MiniAppType.TODO, label: "Todo List", icon: <CheckSquare size={16} /> },
     { id: MiniAppType.RECIPE, label: "Chef Assistant", icon: <ChefHat size={16} /> },
     { id: MiniAppType.CHAT, label: "AI Chat", icon: <Sparkles size={16} /> },
-    { id: MiniAppType.ENERGY, label: "Energy Analyzer", icon: <Lightbulb size={16} /> },
+    // Energy Analyzer is deferred (Phase 6) — hidden unless the flag is set.
+    ...(isEnergyEnabled()
+      ? [{ id: MiniAppType.ENERGY, label: "Energy Analyzer", icon: <Lightbulb size={16} /> }]
+      : []),
   ];
 
   return (

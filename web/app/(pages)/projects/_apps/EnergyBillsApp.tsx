@@ -104,6 +104,10 @@ const EnergyBillsApp: React.FC = () => {
                 </p>
             </div>
 
+            <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-sm text-amber-300">
+                Preview — the analysis backend isn&rsquo;t connected yet, so reports won&rsquo;t generate.
+            </p>
+
             {/* Upload cards */}
             <div className="grid md:grid-cols-2 gap-4">
                 {/* PDF Upload */}
