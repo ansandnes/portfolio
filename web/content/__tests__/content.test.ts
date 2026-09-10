@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { experience } from "@/content/experience";
 import { profile } from "@/content/profile";
-import { resume } from "@/content/resume";
+import { getResume, RESUME_LANGS, resumes } from "@/content/resume";
 import {
   FEATURED_TESTIMONIAL_IDS,
   featuredTestimonials,
@@ -46,22 +46,38 @@ describe("experience", () => {
 });
 
 describe("resume", () => {
-  it("has the sections the page renders", () => {
-    expect(resume.profileSummary.length).toBeGreaterThan(20);
-    expect(resume.skills.length).toBeGreaterThan(0);
-    expect(resume.experience.length).toBeGreaterThan(0);
-    expect(resume.projects.length).toBeGreaterThan(0);
-    expect(resume.education.length).toBeGreaterThan(0);
-    expect(resume.languages.length).toBeGreaterThan(0);
+  it.each(RESUME_LANGS)("[%s] has every section the page renders", (lang) => {
+    const r = resumes[lang];
+    expect(r.lang).toBe(lang);
+    expect(r.profileSummary.length).toBeGreaterThan(20);
+    expect(r.skills.length).toBeGreaterThan(0);
+    expect(r.experience.length).toBeGreaterThan(0);
+    expect(r.projects.length).toBeGreaterThan(0);
+    expect(r.education.length).toBeGreaterThan(0);
+    expect(r.languages.length).toBeGreaterThan(0);
+    for (const key of Object.values(r.labels)) expect(key.trim()).not.toBe("");
   });
 
-  it("points at a downloadable PDF that exists in /public", () => {
-    expect(resume.pdfPath).toBe("/assets/cv_andreas_sandnes.pdf");
+  it.each(RESUME_LANGS)("[%s] points at its own PDF under /assets", (lang) => {
+    expect(resumes[lang].pdfPath).toBe(`/assets/cv_andreas_sandnes_${lang}.pdf`);
   });
 
-  it("agrees with the profile on contact details", () => {
-    expect(resume.contact.email).toBe(profile.email);
-    expect(resume.contact.phone).toBe(profile.phone);
-    expect(resume.contact.location).toBe(profile.location);
+  it.each(RESUME_LANGS)("[%s] agrees with the profile on email/phone", (lang) => {
+    expect(resumes[lang].contact.email).toBe(profile.email);
+    expect(resumes[lang].contact.phone).toBe(profile.phone);
+  });
+
+  it("both languages have matching structure (same job/project/education counts)", () => {
+    const { en, no } = resumes;
+    expect(no.experience).toHaveLength(en.experience.length);
+    expect(no.projects).toHaveLength(en.projects.length);
+    expect(no.education).toHaveLength(en.education.length);
+  });
+
+  it("getResume defaults to English and returns Norwegian for 'no'", () => {
+    expect(getResume(undefined).lang).toBe("en");
+    expect(getResume("en").lang).toBe("en");
+    expect(getResume("no").lang).toBe("no");
+    expect(getResume("xx").lang).toBe("en");
   });
 });

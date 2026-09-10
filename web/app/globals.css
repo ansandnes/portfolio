@@ -204,3 +204,43 @@ a {
 a:hover {
   opacity: 0.85;
 }
+
+/* =========================================
+   Print — used to generate the resume PDFs
+   from /resume. Hides the app chrome so only
+   the white resume card prints.
+========================================= */
+@page {
+  margin: 12mm;
+}
+
+@media print {
+  header,
+  footer,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    background: #fff;
+  }
+
+  /* Neutralise the full-height app shell so the resume doesn't spill a blank
+     trailing page. */
+  .min-h-screen,
+  main {
+    min-height: 0 !important;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .resume-print-card {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+}
