@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js / build output
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Environment (never commit real secrets; .env.example is tracked)
+.env
+.env.*
+!.env.example
+
+# Test / coverage / e2e artifacts
+coverage/
+playwright-report/
+test-results/
+.vitest/
+
+# Python (server/, services/)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+
+# Deploy
+.vercel

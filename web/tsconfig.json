@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+    // TODO(phase-2): enable "verbatimModuleSyntax" once type-only imports are
+    //   normalised (experience/page.tsx, RecipeApp.tsx, TodoApp.tsx import
+    //   interfaces without `import type`). Left off so the baseline compiles
+    //   without editing files Phase 2/3 rewrite.
+    // TODO(phase-2): enable "noUnusedLocals" / "noUnusedParameters" after the
+    //   dead imports in layout.tsx / Navbar.tsx are removed.
+    // TODO(phase-4): enable "noUncheckedIndexedAccess" after the typed content
+    //   layer and lookups land.
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
