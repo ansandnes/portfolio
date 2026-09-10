@@ -15,6 +15,7 @@ export const no = {
     languageLabel: "Språk",
     english: "English",
     norwegian: "Norsk",
+    themeToggle: "Bytt lys/mørk modus",
     toDark: "Bytt til mørk modus",
     toLight: "Bytt til lys modus",
   },

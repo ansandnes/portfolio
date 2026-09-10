@@ -9,6 +9,8 @@ vi.mock("next-themes", () => ({
 
 import TopBar from "@/components/TopBar";
 
+const themeBtn = () => screen.getByRole("button", { name: "Toggle light / dark mode" });
+
 afterEach(() => {
   setTheme.mockClear();
   window.localStorage.clear();
@@ -20,7 +22,8 @@ describe("TopBar", () => {
     expect(screen.getByRole("group", { name: "Language" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "en" })).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByRole("button", { name: "no" })).toHaveAttribute("aria-pressed", "false");
-    expect(screen.getByRole("button", { name: /Switch to light mode/ })).toBeInTheDocument();
+    // stable aria-label; the state-specific hint is a title
+    expect(themeBtn()).toHaveAttribute("title", "Switch to light mode");
   });
 
   it("switching language updates the pressed state and localStorage", () => {
@@ -29,12 +32,12 @@ describe("TopBar", () => {
     expect(screen.getByRole("button", { name: "no" })).toHaveAttribute("aria-pressed", "true");
     expect(window.localStorage.getItem("portfolio.locale")).toBe("no");
     // the theme button's label is localised too
-    expect(screen.getByRole("button", { name: /Bytt til lys modus/ })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Bytt lys/mørk modus" })).toBeInTheDocument();
   });
 
   it("clicking the theme button toggles to light", () => {
     render(<TopBar />);
-    fireEvent.click(screen.getByRole("button", { name: /Switch to light mode/ }));
+    fireEvent.click(themeBtn());
     expect(setTheme).toHaveBeenCalledWith("light");
   });
 });

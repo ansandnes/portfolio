@@ -10,7 +10,9 @@ export default function TopBar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // next-themes can't know the theme until mounted.
+  // next-themes resolves the theme from the DOM on the client's first render,
+  // but it's `undefined` on the server. Anything theme-dependent in the markup
+  // (icon, title) must wait for mount or hydration will mismatch.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
@@ -44,11 +46,12 @@ export default function TopBar() {
           ))}
         </div>
 
-        {/* Theme */}
+        {/* Theme — aria-label is stable (state-independent) so SSR/CSR match. */}
         <button
           type="button"
           onClick={() => setTheme(isDark ? "light" : "dark")}
-          aria-label={isDark ? t.topbar.toLight : t.topbar.toDark}
+          aria-label={t.topbar.themeToggle}
+          title={mounted ? (isDark ? t.topbar.toLight : t.topbar.toDark) : undefined}
           className="p-1.5 rounded-md text-muted hover:text-foreground hover:bg-elevated transition-colors"
         >
           {mounted && isDark ? <Sun size={15} /> : <Moon size={15} />}

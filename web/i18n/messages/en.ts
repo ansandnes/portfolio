@@ -15,6 +15,7 @@ export const en = {
     languageLabel: "Language",
     english: "English",
     norwegian: "Norsk",
+    themeToggle: "Toggle light / dark mode",
     toDark: "Switch to dark mode",
     toLight: "Switch to light mode",
   },
