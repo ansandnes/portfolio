@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import React from 'react';
 import { Quote, Building2, User } from 'lucide-react';
 import testimonials from "@/app/assets/testimonials/Testimonials";
 import GoogleTranslate from '@/app/components/GoogleTranslate';
+
+export const metadata: Metadata = {
+  title: "Testimonials",
+  description: "What colleagues, managers, and collaborators say about working with Andreas Sandnes.",
+};
 
 
 const Testimonials: React.FC = () => {

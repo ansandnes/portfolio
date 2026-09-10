@@ -34,13 +34,10 @@ const AiChat: React.FC = () => {
         setLoading(true);
 
         try {
-            const res = await fetch('/api/ai/gemini/generateText', {
+            const res = await fetch('/api/ai/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    prompt: input,
-                    type: "text",
-                }),
+                body: JSON.stringify({ prompt: input }),
             });
 
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Quote, Building2, User } from "lucide-react";
+import { ROUTES } from "@/lib/routes";
 import testimonials from "@/app/assets/testimonials/Testimonials";
 
 const testimonial = testimonials.slice(4, 6); // Select only one testimonial for homepage display
@@ -21,21 +22,21 @@ export default function HomePage() {
       {/* Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 mt-4">
         <Link
-          href="/projects"
+          href={ROUTES.projects}
           className="btn-style px-6 py-3 rounded-lg bg-emerald-600/80 hover:bg-emerald-600 text-white font-medium transition"
         >
           Explore My Apps
         </Link>
 
         <Link
-          href="/resume"
+          href={ROUTES.resume}
           className="btn-style px-6 py-3 rounded-lg bg-emerald-600/80 hover:bg-white/20 text-slate-200 font-medium transition"
         >
           View My Resume
         </Link>
 
         <Link
-          href="/testimonials"
+          href={ROUTES.testimonials}
           className="btn-style px-6 py-3 rounded-lg bg-emerald-600/80 hover:bg-white/20 text-slate-200 font-medium transition"
         >
           What People Say

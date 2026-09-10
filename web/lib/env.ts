@@ -20,6 +20,8 @@ const serverSchema = z.object({
 });
 
 const clientSchema = z.object({
+  /** Canonical site URL for metadata, sitemap and robots. */
+  NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
   /**
    * Base URL of the Python energy-analysis service. Optional until the Energy
    * Analyzer feature is enabled (Phase 6).

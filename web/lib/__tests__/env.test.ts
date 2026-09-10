@@ -18,9 +18,15 @@ describe("serverEnv", () => {
 });
 
 describe("parseClientEnv", () => {
-  it("accepts a valid URL", () => {
-    expect(parseClientEnv({ NEXT_PUBLIC_API_URL: "http://localhost:8000" })).toEqual({
+  it("accepts valid URLs", () => {
+    expect(
+      parseClientEnv({
+        NEXT_PUBLIC_API_URL: "http://localhost:8000",
+        NEXT_PUBLIC_SITE_URL: "https://example.com",
+      }),
+    ).toEqual({
       NEXT_PUBLIC_API_URL: "http://localhost:8000",
+      NEXT_PUBLIC_SITE_URL: "https://example.com",
     });
   });
 

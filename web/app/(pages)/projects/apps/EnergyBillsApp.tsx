@@ -8,6 +8,7 @@ const EnergyBillsApp: React.FC = () => {
     const [files, setFiles] = useState<File[]>([]);
     const [dataset, setDataset] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const [result, setResult] = useState<{
         pdf?: string;
         csv?: string;
@@ -28,6 +29,7 @@ const EnergyBillsApp: React.FC = () => {
         if (!files.length) return;
 
         setLoading(true);
+        setError("");
         setResult(null);
 
         const formData = new FormData();
@@ -35,12 +37,15 @@ const EnergyBillsApp: React.FC = () => {
         if (dataset) formData.append("dataset", dataset);
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze`, {
+            const res = await fetch("/api/energy/analyze", {
                 method: "POST",
                 body: formData,
             });
 
-            if (!res.ok) throw new Error(`Server error: ${res.status}`);
+            if (!res.ok) {
+                const body = await res.json().catch(() => null);
+                throw new Error(body?.error ?? `Server error: ${res.status}`);
+            }
 
             const blob = await res.blob();
             const url = URL.createObjectURL(blob);
@@ -51,8 +56,7 @@ const EnergyBillsApp: React.FC = () => {
                 json: url,
             });
         } catch (err) {
-            console.error(err);
-            alert("Failed to generate report. See console for details.");
+            setError(err instanceof Error ? err.message : "Failed to generate report.");
         } finally {
             setLoading(false);
         }
@@ -65,12 +69,15 @@ const EnergyBillsApp: React.FC = () => {
         if (dataset) formData.append("dataset", dataset);
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze`, {
+            const res = await fetch("/api/energy/analyze", {
                 method: "POST",
                 body: formData,
             });
 
-            if (!res.ok) throw new Error(`Server error: ${res.status}`);
+            if (!res.ok) {
+                const body = await res.json().catch(() => null);
+                throw new Error(body?.error ?? `Server error: ${res.status}`);
+            }
 
             const blob = await res.blob();
             const url = window.URL.createObjectURL(blob);
@@ -82,8 +89,7 @@ const EnergyBillsApp: React.FC = () => {
             a.remove();
             window.URL.revokeObjectURL(url);
         } catch (err) {
-            console.error(err);
-            alert("Failed to download ZIP. See console for details.");
+            setError(err instanceof Error ? err.message : "Failed to download ZIP.");
         }
     };
 
@@ -157,6 +163,11 @@ const EnergyBillsApp: React.FC = () => {
                     <Lightbulb size={16} />
                     {loading ? "Analyzing..." : "Generate Report"}
                 </button>
+                {error && (
+                    <p className="mt-3 text-sm text-red-400" role="alert">
+                        {error}
+                    </p>
+                )}
             </div>
 
             {/* Result */}

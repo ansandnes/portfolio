@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AppRoute } from "@/app/types";
-import { Code2, FileText, Briefcase, Grid, Menu, X, MessageSquareQuote, Globe } from "lucide-react";
+import { ROUTES, type RoutePath } from "@/lib/routes";
+import { Code2, FileText, Briefcase, Grid, Menu, X, MessageSquareQuote } from "lucide-react";
 
 interface NavItem {
-  to: AppRoute;
+  to: RoutePath;
   label: string;
   icon: React.ReactNode;
 }
@@ -17,11 +17,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems: NavItem[] = [
-    { to: AppRoute.HOME, label: "Home", icon: <Code2 size={18} /> },
-    { to: AppRoute.RESUME, label: "CV - Resume", icon: <FileText size={18} /> },
-    { to: AppRoute.EXPERIENCE, label: "Experience", icon: <Briefcase size={18} /> },
-    { to: AppRoute.TESTIMONIALS, label: "Testimonials", icon: <MessageSquareQuote size={18} /> },
-    { to: AppRoute.PROJECTS, label: "Projects", icon: <Grid size={18} /> },
+    { to: ROUTES.home, label: "Home", icon: <Code2 size={18} /> },
+    { to: ROUTES.resume, label: "CV - Resume", icon: <FileText size={18} /> },
+    { to: ROUTES.experience, label: "Experience", icon: <Briefcase size={18} /> },
+    { to: ROUTES.testimonials, label: "Testimonials", icon: <MessageSquareQuote size={18} /> },
+    { to: ROUTES.projects, label: "Projects", icon: <Grid size={18} /> },
   ];
 
   const toggleMobile = () => setMobileOpen((prev) => !prev);
@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex items-center justify-around h-28 pt-10">
 
           {/* Logo */}
-          <Link href={AppRoute.HOME} className="flex items-center gap-2 cursor-pointer">
+          <Link href={ROUTES.home} className="flex items-center gap-2 cursor-pointer">
             <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
               S
             </div>
