@@ -2,11 +2,11 @@
 
 import React, { useMemo, useState } from "react";
 import { MiniAppType } from "@/app/types";
-import TodoApp from "./apps/TodoApp";
-import RecipeApp from "./apps/RecipeApp";
-// import AiChat from "./apps/AiChat";
-import EnergyBillsApp from "./apps/EnergyBillsApp";
-import { CheckSquare, Lightbulb } from "lucide-react";
+import TodoApp from "./_apps/TodoApp";
+import RecipeApp from "./_apps/RecipeApp";
+import AiChatApp from "./_apps/AiChatApp";
+import EnergyBillsApp from "./_apps/EnergyBillsApp";
+import { CheckSquare, ChefHat, Lightbulb, Sparkles } from "lucide-react";
 
 const Projects: React.FC = () => {
   const [activeApp, setActiveApp] = useState<MiniAppType>(MiniAppType.TODO);
@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
     () => ({
       [MiniAppType.TODO]: <TodoApp />,
       [MiniAppType.RECIPE]: <RecipeApp />,
-      // [MiniAppType.GENAI]: <AiChat />,
+      [MiniAppType.CHAT]: <AiChatApp />,
       [MiniAppType.ENERGY]: <EnergyBillsApp />,
     }),
     [],
@@ -23,8 +23,8 @@ const Projects: React.FC = () => {
 
   const tabs = [
     { id: MiniAppType.TODO, label: "Todo List", icon: <CheckSquare size={16} /> },
-    { id: MiniAppType.RECIPE, label: "Chef Assistant", icon: <CheckSquare size={16} /> },
-    // { id: MiniAppType.GENAI, label: "AI Chat", icon: <Sparkles size={16} /> },
+    { id: MiniAppType.RECIPE, label: "Chef Assistant", icon: <ChefHat size={16} /> },
+    { id: MiniAppType.CHAT, label: "AI Chat", icon: <Sparkles size={16} /> },
     { id: MiniAppType.ENERGY, label: "Energy Analyzer", icon: <Lightbulb size={16} /> },
   ];
 

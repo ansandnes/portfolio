@@ -28,7 +28,7 @@ export interface Testimonial {
 export enum MiniAppType {
   TODO = "todo",
   RECIPE = "recipe",
-  // GENAI = 'genai',
+  CHAT = "chat",
   ENERGY = "energy",
 }
 

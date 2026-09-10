@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { RecipeResponse } from "@/app/types";
 import { ChefHat, Loader2, ArrowRight } from "lucide-react";
 
-// TODO(phase-3): copy currently inline; folds into the content/i18n decision.
 const COPY = {
   title: "Smart Chef Assistant",
   desc: "Not sure what to have for dinner? Describe what you're craving and get a recipe with an ingredient list.",
@@ -34,15 +33,17 @@ const ChefAssistant: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
       });
+      const json = await res.json().catch(() => null);
 
-      const json = await res.json();
-      if (!res.ok || json.error) {
-        throw new Error(json.error ?? "Request failed");
+      if (res.status === 429) {
+        setError("You've made a lot of requests — give it a minute and try again.");
+      } else if (!res.ok || !json?.data) {
+        setError("Couldn't generate a recipe for that. Try rephrasing your request.");
+      } else {
+        setResult(json.data as RecipeResponse);
       }
-
-      setResult(json.data as RecipeResponse);
     } catch {
-      setError("Failed to generate recipe. Please try again.");
+      setError("Couldn't reach the server. Please try again.");
     } finally {
       setLoading(false);
     }
