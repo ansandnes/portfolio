@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { renderWithProviders as render, screen } from "@/test/render";
 import { describe, expect, it } from "vitest";
 import type { Testimonial } from "@/app/types";
 import TestimonialCard from "@/components/TestimonialCard";

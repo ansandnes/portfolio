@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
+import { renderWithProviders as render } from "@/test/render";
 import { beforeEach, describe, expect, it } from "vitest";
 import TodoApp from "@/app/(pages)/projects/_apps/TodoApp";
 

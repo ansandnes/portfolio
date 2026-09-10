@@ -4,14 +4,9 @@ import React, { useEffect, useState } from "react";
 import { TodoItem } from "@/app/types";
 import Button from "@/components/ui/Button";
 import { Plus, Trash2, CheckCircle, Circle } from "lucide-react";
+import { useT } from "@/i18n/LocaleProvider";
 
 const STORAGE_KEY = "portfolio.todos.v1";
-
-const SEED: TodoItem[] = [
-  { id: "1", text: "Skim through Andreas' resume", completed: true },
-  { id: "2", text: "Read what people say about Andreas", completed: true },
-  { id: "3", text: "Invite Andreas to a chat with the team", completed: false },
-];
 
 function isTodoItem(value: unknown): value is TodoItem {
   return (
@@ -23,33 +18,38 @@ function isTodoItem(value: unknown): value is TodoItem {
   );
 }
 
-function loadTodos(): TodoItem[] {
-  if (typeof window === "undefined") return SEED;
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return SEED;
-    const parsed: unknown = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return SEED;
-    const valid = parsed.filter(isTodoItem);
-    return valid.length > 0 || parsed.length === 0 ? valid : SEED;
-  } catch {
-    return SEED;
-  }
-}
-
 const TodoApp: React.FC = () => {
-  // Start from SEED on the server and the first client render (avoids a
-  // hydration mismatch); swap in stored data after mount.
-  const [todos, setTodos] = useState<TodoItem[]>(SEED);
+  const t = useT();
+  const seed: TodoItem[] = t.todo.seed.map((text, i) => ({
+    id: String(i + 1),
+    text,
+    completed: i < 2,
+  }));
+
+  // Start from the (localised) seed on the server and first client render;
+  // swap in stored data after mount to avoid a hydration mismatch.
+  const [todos, setTodos] = useState<TodoItem[]>(seed);
   const [hydrated, setHydrated] = useState(false);
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    // Intentional: /projects is statically prerendered with SEED, so we must
-    // read localStorage after mount to avoid a hydration mismatch.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTodos(loadTodos());
+    let next = seed;
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed: unknown = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          const valid = parsed.filter(isTodoItem);
+          if (valid.length > 0 || parsed.length === 0) next = valid;
+        }
+      }
+    } catch {
+      /* storage unavailable */
+    }
+    setTodos(next);
     setHydrated(true);
+    // Only read storage once, on mount (`seed` identity changes with locale).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const TodoApp: React.FC = () => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     } catch {
-      /* storage unavailable (private mode, quota) — ignore */
+      /* ignore */
     }
   }, [todos, hydrated]);
 
@@ -72,15 +72,15 @@ const TodoApp: React.FC = () => {
   };
 
   const toggleTodo = (id: string) =>
-    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)));
+    setTodos((prev) => prev.map((x) => (x.id === id ? { ...x, completed: !x.completed } : x)));
 
-  const deleteTodo = (id: string) => setTodos((prev) => prev.filter((t) => t.id !== id));
+  const deleteTodo = (id: string) => setTodos((prev) => prev.filter((x) => x.id !== id));
 
   return (
     <div className="h-full flex flex-col">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-white mb-2">Task Manager</h2>
-        <p className="text-slate-400 text-sm">A simple to-do list — saved in your browser.</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">{t.todo.title}</h2>
+        <p className="text-muted text-sm">{t.todo.subtitle}</p>
       </div>
 
       <form onSubmit={addTodo} className="flex gap-2 mb-6">
@@ -88,26 +88,24 @@ const TodoApp: React.FC = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Add a new task..."
-          aria-label="New task"
-          className="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
+          placeholder={t.todo.placeholder}
+          aria-label={t.todo.inputAria}
+          className="flex-1 bg-elevated border border-line rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-emerald-500 transition-colors"
         />
-        <Button type="submit" aria-label="Add task">
+        <Button type="submit" aria-label={t.todo.addAria}>
           <Plus size={18} />
         </Button>
       </form>
 
       <ul className="space-y-2 overflow-y-auto pr-2 custom-scrollbar flex-1">
         {todos.length === 0 && (
-          <li className="text-center text-slate-500 py-10">No tasks yet. Add one above!</li>
+          <li className="text-center text-subtle py-10">{t.todo.empty}</li>
         )}
         {todos.map((todo) => (
           <li
             key={todo.id}
             className={`flex items-center justify-between p-3 rounded-lg border transition-all ${
-              todo.completed
-                ? "bg-slate-900/50 border-slate-800 opacity-75"
-                : "bg-slate-800 border-slate-700"
+              todo.completed ? "bg-elevated border-line opacity-75" : "bg-card border-line"
             }`}
           >
             <div className="flex items-center gap-3 overflow-hidden">
@@ -115,17 +113,19 @@ const TodoApp: React.FC = () => {
                 type="button"
                 onClick={() => toggleTodo(todo.id)}
                 aria-pressed={todo.completed}
-                aria-label={todo.completed ? `Mark "${todo.text}" incomplete` : `Mark "${todo.text}" complete`}
+                aria-label={
+                  todo.completed
+                    ? t.todo.markIncomplete(todo.text)
+                    : t.todo.markComplete(todo.text)
+                }
                 className={`flex-shrink-0 transition-colors ${
-                  todo.completed ? "text-emerald-500" : "text-slate-500 hover:text-slate-300"
+                  todo.completed ? "text-emerald-500" : "text-subtle hover:text-foreground"
                 }`}
               >
                 {todo.completed ? <CheckCircle size={20} /> : <Circle size={20} />}
               </button>
               <span
-                className={`truncate ${
-                  todo.completed ? "line-through text-slate-500" : "text-white"
-                }`}
+                className={`truncate ${todo.completed ? "line-through text-subtle" : "text-foreground"}`}
               >
                 {todo.text}
               </span>
@@ -133,8 +133,8 @@ const TodoApp: React.FC = () => {
             <button
               type="button"
               onClick={() => deleteTodo(todo.id)}
-              aria-label={`Delete "${todo.text}"`}
-              className="text-slate-500 hover:text-red-400 p-1 rounded-md hover:bg-slate-900 transition-colors"
+              aria-label={t.todo.deleteAria(todo.text)}
+              className="text-subtle hover:text-red-500 p-1 rounded-md hover:bg-elevated transition-colors"
             >
               <Trash2 size={16} />
             </button>

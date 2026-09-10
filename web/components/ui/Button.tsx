@@ -13,12 +13,12 @@ const VARIANTS: Record<NonNullable<ButtonProps["variant"]>, string> = {
   secondary:
     "bg-secondary text-white hover:bg-blue-600 focus:ring-blue-500 shadow-lg shadow-blue-900/20",
   outline:
-    "border-2 border-slate-600 text-slate-300 hover:border-slate-400 hover:text-white focus:ring-slate-500",
-  ghost: "text-slate-400 hover:text-white hover:bg-slate-800",
+    "border-2 border-line-strong text-foreground hover:border-line-strong focus:ring-slate-500",
+  ghost: "text-muted hover:text-foreground hover:bg-elevated",
 };
 
 const BASE =
-  "px-4 py-2 rounded-lg font-medium transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed";
+  "px-4 py-2 rounded-lg font-medium transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed";
 
 const Button: React.FC<ButtonProps> = ({
   children,

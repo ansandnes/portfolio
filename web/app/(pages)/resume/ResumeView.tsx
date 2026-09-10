@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Download } from "lucide-react";
 import { RESUME_LANGS, resumes, type ResumeLang } from "@/content/resume";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 const LANG_LABEL: Record<ResumeLang, string> = { en: "English", no: "Norsk" };
 
@@ -11,30 +12,40 @@ export default function ResumeView() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const { locale } = useLocale();
 
-  const [lang, setLang] = useState<ResumeLang>(
-    searchParams.get("lang") === "no" ? "no" : "en",
-  );
+  // `?lang=` wins; otherwise follow the site language.
+  const [lang, setLang] = useState<ResumeLang>(searchParams.get("lang") === "no" ? "no" : "en");
+  const [userChose, setUserChose] = useState(false);
+
+  useEffect(() => {
+    if (!userChose && !searchParams.get("lang")) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLang(locale === "no" ? "no" : "en");
+    }
+  }, [locale, userChose, searchParams]);
+
   const data = resumes[lang];
   const { labels } = data;
 
   const selectLang = (l: ResumeLang) => {
+    setUserChose(true);
     setLang(l);
     router.replace(l === "no" ? `${pathname}?lang=no` : pathname, { scroll: false });
   };
 
   return (
-    <div className="pt-24 pb-20 max-w-6xl mx-auto px-6 animate-slide-up print:pt-0 print:pb-0">
+    <div className="pb-20 max-w-6xl mx-auto px-6 animate-slide-up print:pt-0 print:pb-0">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <h1 className="text-3xl font-bold text-white">{labels.resume}</h1>
+        <h1 className="text-3xl font-bold text-foreground">{labels.resume}</h1>
 
         <div className="flex items-center gap-3" data-print-hide>
           {/* Language toggle */}
           <div
             role="group"
             aria-label={labels.toggleLabel}
-            className="inline-flex rounded-lg border border-slate-700 p-0.5 text-sm"
+            className="inline-flex rounded-lg border border-line p-0.5 text-sm"
           >
             {RESUME_LANGS.map((l) => {
               const active = l === lang;
@@ -46,8 +57,8 @@ export default function ResumeView() {
                   aria-pressed={active}
                   className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
                     active
-                      ? "bg-emerald-600/20 text-emerald-400"
-                      : "text-slate-400 hover:text-white"
+                      ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                      : "text-muted hover:text-foreground"
                   }`}
                 >
                   {LANG_LABEL[l]}
@@ -59,7 +70,7 @@ export default function ResumeView() {
           <a
             href={data.pdfPath}
             download
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-600 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-slate-400 hover:text-white"
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-line-strong px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400"
           >
             <Download size={16} />
             {labels.download}

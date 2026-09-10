@@ -8,6 +8,8 @@ set of interactive "mini-app" demos.
 | Path                | What it is                                                              |
 | ------------------- | --------------------------------------------------------------------- |
 | `web/`              | Next.js 16 (App Router) + React 19 + TypeScript + Tailwind v4 app.    |
+| `web/content/`      | Editable content: `cv/*.json` (resume), `experience.ts`, `testimonials.ts`, `profile.ts`. |
+| `web/i18n/messages/`| UI strings — `en.ts` / `no.ts`. The site has a silent EN/NO toggle + a light/dark toggle (top strip); both remember the choice in `localStorage`, theme defaults to the OS setting. |
 | `services/energy/`  | FastAPI service for the Energy Bill Analyzer. **Deferred** — stub parsing, not deployed, not called by the app. See its README. |
 | `REBUILD_PLAN.md`   | Architecture analysis and the phased rebuild plan this work follows.  |
 

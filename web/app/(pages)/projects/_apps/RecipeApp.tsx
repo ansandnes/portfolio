@@ -3,17 +3,10 @@
 import React, { useState } from "react";
 import { RecipeResponse } from "@/app/types";
 import { ChefHat, Loader2, ArrowRight } from "lucide-react";
-
-const COPY = {
-  title: "Smart Chef Assistant",
-  desc: "Not sure what to have for dinner? Describe what you're craving and get a recipe with an ingredient list.",
-  placeholder: "What are you craving today?",
-  generate: "Generate",
-  instructions: "Instructions",
-  ingredients: "Ingredients Needed",
-};
+import { useT } from "@/i18n/LocaleProvider";
 
 const ChefAssistant: React.FC = () => {
+  const t = useT();
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<RecipeResponse | null>(null);
@@ -36,76 +29,76 @@ const ChefAssistant: React.FC = () => {
       const json = await res.json().catch(() => null);
 
       if (res.status === 429) {
-        setError("You've made a lot of requests — give it a minute and try again.");
+        setError(t.recipe.errRate);
       } else if (!res.ok || !json?.data) {
-        setError("Couldn't generate a recipe for that. Try rephrasing your request.");
+        setError(t.recipe.errGeneric);
       } else {
         setResult(json.data as RecipeResponse);
       }
     } catch {
-      setError("Couldn't reach the server. Please try again.");
+      setError(t.recipe.errNetwork);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="max-w-4xl mx-auto px-4 py-10">
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mb-4">
+        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 mb-4">
           <ChefHat size={32} />
         </div>
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-2">{COPY.title}</h1>
-        <p className="text-lg text-gray-500 max-w-2xl mx-auto">{COPY.desc}</p>
+        <h1 className="text-3xl font-extrabold text-foreground mb-2">{t.recipe.title}</h1>
+        <p className="text-lg text-muted max-w-2xl mx-auto">{t.recipe.desc}</p>
       </div>
 
-      <div className="bg-white shadow-xl rounded-2xl overflow-hidden mb-8">
+      <div className="bg-white text-slate-900 shadow-xl rounded-2xl overflow-hidden mb-8">
         <div className="p-8">
           <form onSubmit={handleSubmit} className="relative">
             <input
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder={COPY.placeholder}
-              className="w-full border-2 border-gray-200 rounded-xl px-6 py-4 text-lg text-gray-700 focus:outline-none focus:border-green-500 pr-32 transition-colors"
+              placeholder={t.recipe.placeholder}
+              className="w-full border-2 border-gray-200 rounded-xl px-6 py-4 text-lg text-gray-700 focus:outline-none focus:border-emerald-500 pr-32 transition-colors"
             />
             <button
               type="submit"
               disabled={loading || !prompt}
-              className="absolute right-2 top-2 bottom-2 bg-green-600 text-white px-6 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              className="absolute right-2 top-2 bottom-2 bg-emerald-600 text-white px-6 rounded-lg font-medium hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
               {loading ? (
                 <Loader2 className="animate-spin" />
               ) : (
                 <>
-                  {COPY.generate} <ArrowRight size={18} />
+                  {t.recipe.generate} <ArrowRight size={18} />
                 </>
               )}
             </button>
           </form>
-          {error && <p className="mt-4 text-red-500 text-sm">{error}</p>}
+          {error && <p className="mt-4 text-red-600 text-sm">{error}</p>}
         </div>
       </div>
 
       {result && (
-        <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden animate-fade-in-up">
-          <div className="bg-green-50 px-8 py-6 border-b border-green-100">
+        <div className="bg-white text-slate-900 border border-gray-200 rounded-2xl overflow-hidden animate-fade-in-up">
+          <div className="bg-emerald-50 px-8 py-6 border-b border-emerald-100">
             <h2 className="text-2xl font-bold text-gray-900">{result.recipeName}</h2>
           </div>
           <div className="p-8">
             <div className="mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">{COPY.instructions}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">{t.recipe.instructions}</h3>
               <p className="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-100">
                 {result.instructions}
               </p>
             </div>
 
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">{COPY.ingredients}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{t.recipe.ingredients}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {result.ingredients.map((ingredient, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-green-300 transition-colors group"
+                  className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-emerald-300 transition-colors group"
                 >
                   <span className="text-gray-700">{ingredient}</span>
                 </div>

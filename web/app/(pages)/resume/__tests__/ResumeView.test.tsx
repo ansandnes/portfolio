@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
+import { renderWithProviders as render } from "@/test/render";
 import { describe, expect, it, vi } from "vitest";
 
 const replace = vi.fn();

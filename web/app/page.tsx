@@ -1,46 +1,47 @@
+"use client";
+
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import { profile } from "@/content/profile";
 import { featuredTestimonials } from "@/content/testimonials";
 import TestimonialCard from "@/components/TestimonialCard";
+import { useT } from "@/i18n/LocaleProvider";
 
 export default function HomePage() {
+  const t = useT();
+
   return (
-    <section className="flex flex-col items-center text-center gap-6 py-24 mt-10">
-      {/* Intro Heading */}
-      <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-        Hi, I&rsquo;m <span className="text-emerald-400">{profile.firstName}</span>. {profile.headline}
+    <section className="flex flex-col items-center text-center gap-6 py-16">
+      <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+        {t.home.greetingLead}
+        <span className="text-emerald-500">{profile.firstName}</span>
+        {t.home.greetingTail}
       </h1>
 
-      {/* Subheading */}
-      <p className="max-w-2xl text-lg md:text-xl text-slate-300 leading-relaxed">{profile.intro}</p>
+      <p className="max-w-2xl text-lg md:text-xl text-muted leading-relaxed">{t.home.intro}</p>
 
-      {/* Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 mt-4">
         <Link
           href={ROUTES.projects}
-          className="btn-style px-6 py-3 rounded-lg bg-emerald-600/80 hover:bg-emerald-600 text-white font-medium transition"
+          className="btn-style px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition"
         >
-          Explore My Apps
+          {t.home.ctaProjects}
         </Link>
-
         <Link
           href={ROUTES.resume}
-          className="btn-style px-6 py-3 rounded-lg bg-emerald-600/80 hover:bg-white/20 text-slate-200 font-medium transition"
+          className="btn-style px-6 py-3 rounded-lg border border-line-strong text-foreground hover:bg-elevated font-medium transition"
         >
-          View My Resume
+          {t.home.ctaResume}
         </Link>
-
         <Link
           href={ROUTES.testimonials}
-          className="btn-style px-6 py-3 rounded-lg bg-emerald-600/80 hover:bg-white/20 text-slate-200 font-medium transition"
+          className="btn-style px-6 py-3 rounded-lg border border-line-strong text-foreground hover:bg-elevated font-medium transition"
         >
-          What People Say
+          {t.home.ctaTestimonials}
         </Link>
       </div>
 
-      {/* Small tagline */}
-      <p className="mt-10 text-sm text-slate-400 max-w-md">{profile.tagline}</p>
+      <p className="mt-10 text-sm text-subtle max-w-md">{t.home.tagline}</p>
 
       {/* Featured testimonials */}
       <div className="grid gap-12 md:grid-cols-2 max-w-6xl mt-20 text-justify">

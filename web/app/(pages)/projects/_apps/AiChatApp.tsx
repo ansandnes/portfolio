@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import { Send, Bot, User, Sparkles } from "lucide-react";
+import { useT } from "@/i18n/LocaleProvider";
 
 interface Message {
   id: string;
@@ -10,17 +11,15 @@ interface Message {
   text: string;
 }
 
-const GREETING: Message = {
-  id: "0",
-  role: "model",
-  text: "Hello! I'm a Gemini-powered assistant. Ask me anything about code, design, or the universe. (Each message is answered on its own — I don't keep the conversation in context.)",
-};
-
 const AiChatApp: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([GREETING]);
+  const t = useT();
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const greeting: Message = { id: "greeting", role: "model", text: t.chat.greeting };
+  const shown = messages.length === 0 ? [greeting] : messages;
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -31,7 +30,10 @@ const AiChatApp: React.FC = () => {
     const prompt = input.trim();
     if (!prompt || loading) return;
 
-    setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: "user", text: prompt }]);
+    setMessages((prev) => [
+      ...(prev.length === 0 ? [greeting] : prev),
+      { id: crypto.randomUUID(), role: "user", text: prompt },
+    ]);
     setInput("");
     setLoading(true);
 
@@ -44,15 +46,11 @@ const AiChatApp: React.FC = () => {
       });
       const json = await res.json().catch(() => null);
 
-      if (res.status === 429) {
-        text = "You're sending messages quickly — give it a minute and try again.";
-      } else if (!res.ok || !json?.data) {
-        text = "Sorry, I couldn't get a response. Please try again.";
-      } else {
-        text = json.data;
-      }
+      if (res.status === 429) text = t.chat.errRate;
+      else if (!res.ok || !json?.data) text = t.chat.errGeneric;
+      else text = json.data;
     } catch {
-      text = "Sorry, I couldn't reach the server. Please try again.";
+      text = t.chat.errNetwork;
     } finally {
       setLoading(false);
     }
@@ -65,20 +63,20 @@ const AiChatApp: React.FC = () => {
       <div className="mb-4 flex items-center gap-2">
         <Sparkles className="text-purple-400" size={24} />
         <div>
-          <h2 className="text-2xl font-bold text-white">AI Playground</h2>
-          <p className="text-slate-400 text-xs">Powered by Google Gemini 2.5 Flash</p>
+          <h2 className="text-2xl font-bold text-foreground">{t.chat.title}</h2>
+          <p className="text-muted text-xs">{t.chat.poweredBy}</p>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto bg-slate-900/50 rounded-xl p-4 border border-slate-700 mb-4 custom-scrollbar">
+      <div className="flex-1 overflow-y-auto bg-elevated rounded-xl p-4 border border-line mb-4 custom-scrollbar">
         <div className="space-y-4">
-          {messages.map((msg) => (
+          {shown.map((msg) => (
             <div
               key={msg.id}
               className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
             >
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-white ${
                   msg.role === "user" ? "bg-emerald-600" : "bg-purple-600"
                 }`}
               >
@@ -87,8 +85,8 @@ const AiChatApp: React.FC = () => {
               <div
                 className={`max-w-[80%] px-4 py-2 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
                   msg.role === "user"
-                    ? "bg-emerald-600/20 text-emerald-100 rounded-tr-none"
-                    : "bg-slate-800 text-slate-200 rounded-tl-none"
+                    ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-100 rounded-tr-none"
+                    : "bg-card text-foreground rounded-tl-none"
                 }`}
               >
                 {msg.text}
@@ -97,13 +95,13 @@ const AiChatApp: React.FC = () => {
           ))}
           {loading && (
             <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0 text-white">
                 <Bot size={16} />
               </div>
-              <div className="bg-slate-800 px-4 py-2 rounded-2xl rounded-tl-none flex items-center gap-1">
-                <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce" />
-                <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce delay-75" />
-                <span className="w-2 h-2 bg-slate-500 rounded-full animate-bounce delay-150" />
+              <div className="bg-card px-4 py-2 rounded-2xl rounded-tl-none flex items-center gap-1">
+                <span className="w-2 h-2 bg-subtle rounded-full animate-bounce" />
+                <span className="w-2 h-2 bg-subtle rounded-full animate-bounce delay-75" />
+                <span className="w-2 h-2 bg-subtle rounded-full animate-bounce delay-150" />
               </div>
             </div>
           )}
@@ -116,16 +114,16 @@ const AiChatApp: React.FC = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask something..."
-          aria-label="Message"
+          placeholder={t.chat.placeholder}
+          aria-label={t.chat.inputAria}
           disabled={loading}
-          className="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors disabled:opacity-50"
+          className="flex-1 bg-elevated border border-line rounded-lg px-4 py-3 text-foreground focus:outline-none focus:border-purple-500 transition-colors disabled:opacity-50"
         />
         <Button
           type="submit"
           variant="secondary"
           disabled={loading}
-          aria-label="Send message"
+          aria-label={t.chat.sendAria}
           className="!bg-purple-600 hover:!bg-purple-700"
         >
           <Send size={18} />
