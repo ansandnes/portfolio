@@ -6,7 +6,7 @@ import TodoApp from "./apps/TodoApp";
 import RecipeApp from "./apps/RecipeApp";
 // import AiChat from "./apps/AiChat";
 import EnergyBillsApp from "./apps/EnergyBillsApp";
-import { CheckSquare, Lightbulb, Sparkles } from "lucide-react";
+import { CheckSquare, Lightbulb } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Projects: React.FC = () => {

@@ -12,6 +12,19 @@ export interface ExperienceItem {
   techStack: string[];
 }
 
+export interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  company: string;
+  relation: string;
+  image: string | null;
+  content: string;
+  tech: string[];
+  traits: string[];
+  impact: string[];
+}
+
 export enum MiniAppType {
   TODO = "todo",
   RECIPE = "recipe",

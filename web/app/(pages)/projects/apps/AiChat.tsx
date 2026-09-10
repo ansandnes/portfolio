@@ -48,7 +48,7 @@ const AiChat: React.FC = () => {
                 text: data.data || "No response received."
             };
             setMessages(prev => [...prev, botMsg]);
-        } catch (error) {
+        } catch {
             const errorMsg: Message = {
                 id: (Date.now() + 1).toString(),
                 role: 'model',

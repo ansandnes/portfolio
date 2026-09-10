@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import React from 'react';
 import { Quote, Building2, User } from 'lucide-react';
-import testimonials from "@/app/assets/testimonials/Testimonials";
-import GoogleTranslate from '@/app/components/GoogleTranslate';
+import { testimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = {
   title: "Testimonials",
