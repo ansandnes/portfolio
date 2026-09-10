@@ -7,8 +7,9 @@ import { useT } from "@/i18n/LocaleProvider";
 import TodoApp from "./_apps/TodoApp";
 import RecipeApp from "./_apps/RecipeApp";
 import AiChatApp from "./_apps/AiChatApp";
+import SnakeApp from "./_apps/SnakeApp";
 import EnergyBillsApp from "./_apps/EnergyBillsApp";
-import { CheckSquare, ChefHat, Lightbulb, Sparkles } from "lucide-react";
+import { CheckSquare, ChefHat, Gamepad2, Lightbulb, Sparkles } from "lucide-react";
 
 const Projects: React.FC = () => {
   const t = useT();
@@ -19,6 +20,7 @@ const Projects: React.FC = () => {
       [MiniAppType.TODO]: <TodoApp />,
       [MiniAppType.RECIPE]: <RecipeApp />,
       [MiniAppType.CHAT]: <AiChatApp />,
+      [MiniAppType.SNAKE]: <SnakeApp />,
       [MiniAppType.ENERGY]: <EnergyBillsApp />,
     }),
     [],
@@ -28,6 +30,7 @@ const Projects: React.FC = () => {
     { id: MiniAppType.TODO, label: t.projects.tabs.todo, icon: <CheckSquare size={16} /> },
     { id: MiniAppType.RECIPE, label: t.projects.tabs.recipe, icon: <ChefHat size={16} /> },
     { id: MiniAppType.CHAT, label: t.projects.tabs.chat, icon: <Sparkles size={16} /> },
+    { id: MiniAppType.SNAKE, label: t.projects.tabs.snake, icon: <Gamepad2 size={16} /> },
     // Energy Analyzer is deferred (Phase 6) — hidden unless the flag is set.
     ...(isEnergyEnabled()
       ? [{ id: MiniAppType.ENERGY, label: t.projects.tabs.energy, icon: <Lightbulb size={16} /> }]

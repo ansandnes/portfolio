@@ -29,6 +29,7 @@ export enum MiniAppType {
   TODO = "todo",
   RECIPE = "recipe",
   CHAT = "chat",
+  SNAKE = "snake",
   ENERGY = "energy",
 }
 
