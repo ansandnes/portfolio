@@ -211,7 +211,7 @@ a:hover {
    the white resume card prints.
 ========================================= */
 @page {
-  margin: 12mm;
+  margin: 14mm;
 }
 
 @media print {
@@ -242,5 +242,11 @@ a:hover {
   .resume-print-card {
     box-shadow: none !important;
     border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Don't split a section, job, or project across pages. */
+  .break-inside-avoid {
+    break-inside: avoid;
   }
 }

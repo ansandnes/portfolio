@@ -1,0 +1,86 @@
+{
+  "labels": {
+    "resume": "CV",
+    "download": "Last ned PDF",
+    "profile": "Profil",
+    "skills": "Tekniske ferdigheter",
+    "contact": "Kontakt",
+    "languages": "Språk",
+    "experience": "Profesjonell erfaring",
+    "projects": "Prosjekter",
+    "education": "Utdanning",
+    "opensNewTab": "(åpnes i ny fane)",
+    "toggleLabel": "CV-språk"
+  },
+  "profileSummary": "Teknisk interessert og samarbeidsorientert ingeniør med erfaring innen datakommunikasjon, systemovervåkning og feilsøking. Har jobbet med analyse av store mengder data og med integrasjon av tekniske anlegg der stabile systemer, tydelig kommunikasjon og raske problemløsninger er avgjørende. Jeg liker å jobbe strukturert og motiveres av å forstå hvordan systemer henger sammen.",
+  "contact": {
+    "location": "Trondheim, Norge",
+    "phone": "+47 97 26 78 84",
+    "email": "asandnes92@gmail.com"
+  },
+  "skills": [
+    {
+      "category": "Generelt",
+      "items": ["Datakommunikasjon", "Git", "Programmering", "SQL", "KI-agenter"]
+    },
+    { "category": "Cloud / HPC", "items": ["High-Performance Computing (Computerome)"] },
+    {
+      "category": "Bioinformatikk",
+      "items": ["scRNA-seq (10x Genomics, Seurat)", "DGE (DESeq2, EdgeR)"]
+    }
+  ],
+  "languages": ["Norsk (Morsmål)", "Engelsk (Flytende)", "Dansk (Flytende)"],
+  "experience": [
+    {
+      "role": "Teknisk System Ingeniør",
+      "company": "Kiona AS",
+      "period": "01/26 – Nå",
+      "bullets": [
+        "Overvåking og vedlikehold av tekniske systemer for å sikre stabil drift av butikk- og byggautomasjon, inkludert feilsøking og rask problemløsning."
+      ]
+    },
+    {
+      "role": "Bioinformatiker",
+      "company": "National Center for Cancer Immune Therapy (CCIT)",
+      "period": "03/25 – 08/25",
+      "bullets": [
+        "Utviklet en Python-basert webapplikasjon (Dash/Plotly) for å automatisere håndteringen av data-output fra HLA-typing, integrerte kvalitetskontroll og effektiviserte dataleveransen for immunologisk forskning.",
+        "Automatiserte data-konverteringsflyter i et høytytende Linux-datamiljø, fjernet flaskehalser og akselererte datatilgangen for forskningsteam.",
+        "Analyserte single-cell RNA-seq-data med Seurat for å behandle og tolke komplekse immunologiske datasett, som direkte støttet pågående kreftimmunoterapi-forskning."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Frivillig utvikler — Mat til Gaza (politisk nøytral hjelpeorganisasjon)",
+      "bullets": ["Utvikling og vedlikehold av nettside som fremmer organisasjonens arbeid."],
+      "link": { "label": "mattilgaza.vercel.app", "href": "https://mattilgaza.vercel.app/" }
+    },
+    {
+      "title": "Masteroppgave — samarbeid med Amgen Research Copenhagen (ARC)",
+      "bullets": [
+        "Anvendte statistiske verktøy for å skille falske positive molekyler fra potensielle medisin-kandidater i utvalg fra DNA-kodede bibliotek.",
+        "Sammenlignet statistiske distribusjoner av ulike datasett for å teste kompatibiliteten av forskjellige analysemetoder."
+      ]
+    },
+    {
+      "title": "Dashboard-utvikling — Studentassistent for Computational Science Group hos ARC",
+      "bullets": [
+        "Utviklet og vedlikeholdt interaktive dashboards ved bruk av Python for å gi en strukturert oversikt over småmolekyl-prosjekter.",
+        "Overvåket bruk av sekvenseringsressurser, noe som forbedret prosjektsporing og beslutningstaking."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master i Bioinformatikk",
+      "institution": "Københavns Universitet (KU)",
+      "period": "09/21 – 06/24"
+    },
+    {
+      "degree": "Bachelor i Biokjemi",
+      "institution": "Københavns Universitet (KU)",
+      "period": "09/16 – 02/20"
+    }
+  ]
+}

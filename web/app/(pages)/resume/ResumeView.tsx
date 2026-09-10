@@ -71,7 +71,7 @@ export default function ResumeView() {
       <div className="resume-print-card bg-white text-slate-900 rounded-lg shadow-2xl overflow-hidden p-8 sm:p-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left sidebar */}
         <div className="col-span-1 space-y-8 bg-gray-100 p-4 rounded-lg">
-          <section>
+          <section className="break-inside-avoid">
             <div className="text-2xl font-bold mb-4">Andreas Sandnes</div>
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
               {labels.profile}
@@ -79,7 +79,7 @@ export default function ResumeView() {
             <p className="text-sm text-slate-700">{data.profileSummary}</p>
           </section>
 
-          <section>
+          <section className="break-inside-avoid">
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
               {labels.skills}
             </h3>
@@ -93,7 +93,7 @@ export default function ResumeView() {
             </ul>
           </section>
 
-          <section>
+          <section className="break-inside-avoid">
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
               {labels.contact}
             </h3>
@@ -104,7 +104,7 @@ export default function ResumeView() {
             </ul>
           </section>
 
-          <section>
+          <section className="break-inside-avoid">
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
               {labels.languages}
             </h3>
@@ -123,7 +123,7 @@ export default function ResumeView() {
               {labels.experience}
             </h3>
             {data.experience.map((job) => (
-              <div key={`${job.company}-${job.period}`} className="mb-6">
+              <div key={`${job.company}-${job.period}`} className="mb-6 break-inside-avoid">
                 <div className="flex justify-between items-baseline mb-1">
                   <h4 className="font-bold text-lg">{job.role}</h4>
                   <span className="text-sm text-slate-500 italic">{job.period}</span>
@@ -143,7 +143,7 @@ export default function ResumeView() {
               {labels.projects}
             </h3>
             {data.projects.map((proj) => (
-              <div key={proj.title} className="mb-4">
+              <div key={proj.title} className="mb-4 break-inside-avoid">
                 <div className="font-bold">{proj.title}</div>
                 <ul className="list-disc list-outside ml-4 text-slate-700 space-y-1 text-sm">
                   {proj.bullets.map((line, i) => (
@@ -166,13 +166,13 @@ export default function ResumeView() {
             ))}
           </section>
 
-          <section>
+          <section className="break-inside-avoid">
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
               {labels.education}
             </h3>
             <div className="flex flex-wrap gap-8">
               {data.education.map((edu) => (
-                <div key={edu.degree} className="mb-4 w-64">
+                <div key={edu.degree} className="mb-4 w-64 break-inside-avoid">
                   <div className="font-bold">{edu.degree}</div>
                   <div className="text-slate-600">{edu.institution}</div>
                   <div className="text-sm text-slate-500 italic">{edu.period}</div>
