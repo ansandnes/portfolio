@@ -12,8 +12,3 @@ export type RecipeResponse = z.infer<typeof recipeResponseSchema>;
 export const recipeRequestSchema = z.object({
   prompt: z.string().trim().min(1).max(500),
 });
-
-/** POST body for `/api/ai/chat`. */
-export const chatRequestSchema = z.object({
-  prompt: z.string().trim().min(1).max(2000),
-});

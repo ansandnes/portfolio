@@ -45,7 +45,6 @@ export const no = {
     tabs: {
       todo: "Gjøremål",
       recipe: "Kjøkkenassistent",
-      chat: "KI-chat",
       snake: "Snake",
       energy: "Strømregning-analyse",
     },
@@ -90,18 +89,6 @@ export const no = {
     errRate: "Du har gjort mange forespørsler — vent et minutt og prøv igjen.",
     errGeneric: "Klarte ikke å lage en oppskrift for det. Prøv å omformulere.",
     errNetwork: "Fikk ikke kontakt med serveren. Prøv igjen.",
-  },
-  chat: {
-    greeting:
-      "Hei! Jeg er en Gemini-drevet assistent. Spør meg om kode, design eller universet. (Hver melding besvares for seg — jeg husker ikke samtalen.)",
-    title: "KI-lekeplass",
-    poweredBy: "Drevet av Google Gemini 2.5 Flash",
-    placeholder: "Spør om noe …",
-    inputAria: "Melding",
-    sendAria: "Send melding",
-    errRate: "Du sender meldinger raskt — vent et minutt og prøv igjen.",
-    errGeneric: "Beklager, jeg fikk ikke noe svar. Prøv igjen.",
-    errNetwork: "Beklager, jeg fikk ikke kontakt med serveren. Prøv igjen.",
   },
   snake: {
     title: "Snake",

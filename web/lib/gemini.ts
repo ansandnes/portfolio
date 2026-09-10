@@ -18,15 +18,6 @@ function getClient(): GoogleGenAI {
   return client;
 }
 
-/** Free-form text generation. */
-export async function generateText(prompt: string): Promise<string> {
-  const response = await getClient().models.generateContent({
-    model: MODEL,
-    contents: prompt,
-  });
-  return response.text ?? "";
-}
-
 /** Structured recipe generation, validated against `recipeResponseSchema`. */
 export async function generateRecipe(prompt: string): Promise<RecipeResponse> {
   const response = await getClient().models.generateContent({

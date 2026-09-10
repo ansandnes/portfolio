@@ -45,7 +45,6 @@ export const en = {
     tabs: {
       todo: "Todo List",
       recipe: "Chef Assistant",
-      chat: "AI Chat",
       snake: "Snake",
       energy: "Energy Analyzer",
     },
@@ -90,18 +89,6 @@ export const en = {
     errRate: "You've made a lot of requests — give it a minute and try again.",
     errGeneric: "Couldn't generate a recipe for that. Try rephrasing your request.",
     errNetwork: "Couldn't reach the server. Please try again.",
-  },
-  chat: {
-    greeting:
-      "Hello! I'm a Gemini-powered assistant. Ask me anything about code, design, or the universe. (Each message is answered on its own — I don't keep the conversation in context.)",
-    title: "AI Playground",
-    poweredBy: "Powered by Google Gemini 2.5 Flash",
-    placeholder: "Ask something...",
-    inputAria: "Message",
-    sendAria: "Send message",
-    errRate: "You're sending messages quickly — give it a minute and try again.",
-    errGeneric: "Sorry, I couldn't get a response. Please try again.",
-    errNetwork: "Sorry, I couldn't reach the server. Please try again.",
   },
   snake: {
     title: "Snake",
