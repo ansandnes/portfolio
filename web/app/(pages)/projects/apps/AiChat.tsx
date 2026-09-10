@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Button from '../../../components/Button';
+import Button from '@/components/ui/Button';
 import { Send, Bot, User, Sparkles } from 'lucide-react';
 
 interface Message {

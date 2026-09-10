@@ -16,11 +16,6 @@ const eslintConfig = [
 
   {
     rules: {
-      // TODO(phase-4): re-enable as "error". Remaining hits are raw quotes/
-      //   apostrophes in the testimonial-card markup, which Phase 4 extracts
-      //   into a shared <TestimonialCard /> component.
-      "react/no-unescaped-entities": "warn",
-
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },

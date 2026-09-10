@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TodoItem } from '../../../types';
-import Button from '../../../components/Button';
+import { TodoItem } from '@/app/types';
+import Button from '@/components/ui/Button';
 import { Plus, Trash2, CheckCircle, Circle } from 'lucide-react';
 
 const TodoApp: React.FC = () => {

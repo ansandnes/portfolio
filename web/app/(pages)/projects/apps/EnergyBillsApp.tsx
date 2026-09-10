@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Upload, FileText, Database, Lightbulb } from "lucide-react";
-import { motion } from "framer-motion";
 
 const EnergyBillsApp: React.FC = () => {
     const [files, setFiles] = useState<File[]>([]);
@@ -108,10 +107,7 @@ const EnergyBillsApp: React.FC = () => {
             {/* Upload cards */}
             <div className="grid md:grid-cols-2 gap-4">
                 {/* PDF Upload */}
-                <motion.div
-                    whileHover={{ scale: 1.01 }}
-                    className="bg-slate-900/50 border border-slate-700 rounded-xl p-5"
-                >
+                <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5 transition-transform hover:scale-[1.01]">
                     <div className="flex items-center gap-2 mb-3 text-emerald-400">
                         <Upload size={18} />
                         <span className="font-medium">Upload Bills</span>
@@ -128,13 +124,10 @@ const EnergyBillsApp: React.FC = () => {
                     <p className="text-xs text-slate-500 mt-2">
                         Upload one or multiple electricity bill PDFs.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Dataset Upload */}
-                <motion.div
-                    whileHover={{ scale: 1.01 }}
-                    className="bg-slate-900/50 border border-slate-700 rounded-xl p-5"
-                >
+                <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5 transition-transform hover:scale-[1.01]">
                     <div className="flex items-center gap-2 mb-3 text-emerald-400">
                         <Database size={18} />
                         <span className="font-medium">Upload Previous Dataset</span>
@@ -150,7 +143,7 @@ const EnergyBillsApp: React.FC = () => {
                     <p className="text-xs text-slate-500 mt-2">
                         Optional: merge with previous year data.
                     </p>
-                </motion.div>
+                </div>
             </div>
 
             {/* Submit */}
@@ -172,11 +165,7 @@ const EnergyBillsApp: React.FC = () => {
 
             {/* Result */}
             {result && (
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-slate-900/50 border border-slate-700 rounded-xl p-5"
-                >
+                <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5 animate-fade-in-up">
                     <h3 className="text-white font-medium mb-3 flex items-center gap-2">
                         <FileText size={16} />
                         Download Results
@@ -215,7 +204,7 @@ const EnergyBillsApp: React.FC = () => {
                             Download All Files as ZIP
                         </button>
                     </div>
-                </motion.div>
+                </div>
             )}
         </div>
     );
