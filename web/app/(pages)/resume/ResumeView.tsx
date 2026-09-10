@@ -70,7 +70,7 @@ export default function ResumeView() {
           <a
             href={data.pdfPath}
             download
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-line-strong px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg border-2 border-line-strong px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400"
           >
             <Download size={16} />
             {labels.download}
@@ -183,7 +183,7 @@ export default function ResumeView() {
             </h3>
             <div className="flex flex-wrap gap-8">
               {data.education.map((edu) => (
-                <div key={edu.degree} className="mb-4 w-64 break-inside-avoid">
+                <div key={edu.degree} className="mb-4 w-full sm:w-64 break-inside-avoid">
                   <div className="font-bold">{edu.degree}</div>
                   <div className="text-slate-600">{edu.institution}</div>
                   <div className="text-sm text-slate-500 italic">{edu.period}</div>

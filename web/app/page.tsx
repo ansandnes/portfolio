@@ -44,7 +44,7 @@ export default function HomePage() {
       <p className="mt-10 text-sm text-subtle max-w-md">{t.home.tagline}</p>
 
       {/* Featured testimonials */}
-      <div className="grid gap-12 md:grid-cols-2 max-w-6xl mt-20 text-justify">
+      <div className="grid gap-12 md:grid-cols-2 w-full max-w-6xl mt-20 md:text-justify">
         {featuredTestimonials.map((testimonial, index) => (
           <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
         ))}

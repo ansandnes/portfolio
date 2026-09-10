@@ -34,10 +34,12 @@ export default function TestimonialCard({
             <div className="font-bold text-foreground group-hover:text-emerald-500 transition-colors">
               {testimonial.name}
             </div>
-            <div className="text-sm text-muted flex items-center gap-1.5">
-              <Building2 size={12} />
-              {testimonial.role} {t.testimonials.at}{" "}
-              <span className="font-medium text-foreground">{testimonial.company}</span>
+            <div className="text-sm text-muted flex flex-wrap items-center gap-x-1.5">
+              <Building2 size={12} className="shrink-0" />
+              <span>
+                {testimonial.role} {t.testimonials.at}{" "}
+                <span className="font-medium text-foreground">{testimonial.company}</span>
+              </span>
             </div>
           </div>
         </div>

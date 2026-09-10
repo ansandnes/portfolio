@@ -48,7 +48,7 @@ const Projects: React.FC = () => {
         <div
           role="tablist"
           aria-label={t.projects.tablist}
-          className="bg-elevated border-b md:border-b-0 md:border-r border-line p-2 md:w-64 flex md:flex-col gap-2 overflow-x-auto md:overflow-visible custom-scrollbar"
+          className="bg-elevated border-b md:border-b-0 md:border-r border-line p-2 md:w-64 flex flex-wrap md:flex-col gap-2"
         >
           {tabs.map((tab) => {
             const isActive = activeApp === tab.id;

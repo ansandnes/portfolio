@@ -1,6 +1,7 @@
 import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders as render } from "@/test/render";
 import { describe, expect, it, vi } from "vitest";
+import { resumeNo } from "@/content/resume";
 
 const replace = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -26,9 +27,10 @@ describe("ResumeView", () => {
     render(<ResumeView />);
     fireEvent.click(screen.getByRole("button", { name: "Norsk" }));
 
-    expect(screen.getByRole("heading", { level: 1, name: "CV" })).toBeInTheDocument();
-    expect(screen.getByText("Profesjonell erfaring")).toBeInTheDocument();
-    expect(screen.getByText("Teknisk System Ingeniør")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: resumeNo.labels.resume })).toBeInTheDocument();
+    expect(screen.getByText(resumeNo.labels.experience)).toBeInTheDocument();
+    // a value straight from the NO content file (survives CMS edits)
+    expect(screen.getByText(resumeNo.experience[0].role)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Last ned PDF/ })).toHaveAttribute(
       "href",
       "/assets/cv_andreas_sandnes_no.pdf",
