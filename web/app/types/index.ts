@@ -10,6 +10,33 @@ export interface ExperienceItem {
   period: string;
   description: string[];
   techStack: string[];
+  /** Path under /public to a photo shown as a circular thumbnail on the card. */
+  image?: string;
+}
+
+export interface ArchitectureNode {
+  id: string;
+  label: string;
+  description?: string;
+}
+
+/** A chunk of prose, or a link rendered inline within it. */
+export type TextSegment = string | { text: string; href: string };
+
+/** The parts of a featured project that read as prose — translated per locale. */
+export interface FeaturedProjectTranslation {
+  tagline: string;
+  goal: string;
+  motivation: TextSegment[];
+  architecture: ArchitectureNode[];
+}
+
+export interface FeaturedProject {
+  id: string;
+  name: string;
+  url: string;
+  techStack: string[];
+  translations: { en: FeaturedProjectTranslation; no: FeaturedProjectTranslation };
 }
 
 export interface Testimonial {

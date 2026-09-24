@@ -36,7 +36,8 @@
       "company": "Kiona AS",
       "period": "01/26 – Nå",
       "bullets": [
-        "Overvåking og vedlikehold av tekniske systemer for å sikre stabil drift av butikk- og byggautomasjon, inkludert feilsøking og rask problemløsning."
+        "Jeg jobber i skjæringspunktet mellom programvare, data og fysiske tekniske systemer. Jeg arbeider med datakommunikasjon, integrasjoner og feilsøking, og bidrar til å gjøre systemer i bygg og varehandel mer synlige, sammenkoblede og effektive.",
+        "Samarbeid er en stor del av arbeidet mitt. Jeg jobber tett sammen med teknikere for å løse problemer og drive prosjekter fremover."
       ]
     },
     {
@@ -61,13 +62,6 @@
       "bullets": [
         "Anvendte statistiske verktøy for å skille falske positive molekyler fra potensielle medisin-kandidater i utvalg fra DNA-kodede bibliotek.",
         "Sammenlignet statistiske distribusjoner av ulike datasett for å teste kompatibiliteten av forskjellige analysemetoder."
-      ]
-    },
-    {
-      "title": "Dashboard-utvikling — Studentassistent for Computational Science Group hos ARC",
-      "bullets": [
-        "Utviklet og vedlikeholdt interaktive dashboards ved bruk av Python for å gi en strukturert oversikt over småmolekyl-prosjekter.",
-        "Overvåket bruk av sekvenseringsressurser, noe som forbedret prosjektsporing og beslutningstaking."
       ]
     }
   ],

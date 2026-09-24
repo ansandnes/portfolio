@@ -79,36 +79,40 @@ export default function ResumeView() {
       </div>
 
       {/* Main grid */}
-      <div className="resume-print-card bg-white text-slate-900 rounded-lg shadow-2xl overflow-hidden p-8 sm:p-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="resume-print-card bg-white text-slate-900 rounded-lg shadow-2xl overflow-hidden p-8 sm:p-12 print:p-5 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-8 print:gap-6">
         {/* Left sidebar */}
-        <div className="col-span-1 space-y-8 bg-gray-100 p-4 rounded-lg">
+        <div className="col-span-1 space-y-8 print:space-y-4 bg-gray-100 p-4 rounded-lg">
           <section className="break-inside-avoid">
-            <div className="text-2xl font-bold mb-4">Andreas Sandnes</div>
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <div className="text-2xl font-bold mb-4 print:text-xl print:mb-2">Andreas Sandnes</div>
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.profile}
             </h3>
-            <p className="text-sm text-slate-700">{data.profileSummary}</p>
+            <p className="text-sm text-slate-700 print:text-xs print:leading-snug">
+              {data.profileSummary}
+            </p>
           </section>
 
           <section className="break-inside-avoid">
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.skills}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 print:space-y-1">
               {data.skills.map((skill) => (
                 <li key={skill.category}>
-                  <div className="font-semibold text-sm">{skill.category}</div>
-                  <div className="text-slate-600 text-sm">{skill.items.join(", ")}</div>
+                  <div className="font-semibold text-sm print:text-xs">{skill.category}</div>
+                  <div className="text-slate-600 text-sm print:text-xs print:leading-snug">
+                    {skill.items.join(", ")}
+                  </div>
                 </li>
               ))}
             </ul>
           </section>
 
           <section className="break-inside-avoid">
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.contact}
             </h3>
-            <ul className="space-y-1 text-sm text-slate-700">
+            <ul className="space-y-1 text-sm text-slate-700 print:text-xs">
               <li>{data.contact.location}</li>
               <li>{data.contact.phone}</li>
               <li>{data.contact.email}</li>
@@ -116,10 +120,10 @@ export default function ResumeView() {
           </section>
 
           <section className="break-inside-avoid">
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.languages}
             </h3>
-            <ul className="space-y-1 text-sm text-slate-700">
+            <ul className="space-y-1 text-sm text-slate-700 print:text-xs">
               {data.languages.map((l) => (
                 <li key={l}>{l}</li>
               ))}
@@ -128,19 +132,21 @@ export default function ResumeView() {
         </div>
 
         {/* Right content */}
-        <div className="col-span-1 md:col-span-2 space-y-8">
+        <div className="col-span-1 md:col-span-2 print:col-span-2 space-y-8 print:space-y-4">
           <section>
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.experience}
             </h3>
             {data.experience.map((job) => (
-              <div key={`${job.company}-${job.period}`} className="mb-6 break-inside-avoid">
+              <div key={`${job.company}-${job.period}`} className="mb-6 print:mb-2 break-inside-avoid">
                 <div className="flex justify-between items-baseline mb-1">
-                  <h4 className="font-bold text-lg">{job.role}</h4>
-                  <span className="text-sm text-slate-500 italic">{job.period}</span>
+                  <h4 className="font-bold text-lg print:text-base">{job.role}</h4>
+                  <span className="text-sm text-slate-500 italic print:text-xs">{job.period}</span>
                 </div>
-                <div className="text-emerald-600 font-medium mb-2">{job.company}</div>
-                <ul className="list-disc list-outside ml-4 text-slate-700 space-y-1 text-sm">
+                <div className="text-emerald-600 font-medium mb-2 print:mb-1 print:text-sm">
+                  {job.company}
+                </div>
+                <ul className="list-disc list-outside ml-4 text-slate-700 space-y-1 text-sm print:text-xs print:leading-snug">
                   {job.bullets.map((line, i) => (
                     <li key={i}>{line}</li>
                   ))}
@@ -150,13 +156,13 @@ export default function ResumeView() {
           </section>
 
           <section>
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.projects}
             </h3>
             {data.projects.map((proj) => (
-              <div key={proj.title} className="mb-4 break-inside-avoid">
-                <div className="font-bold">{proj.title}</div>
-                <ul className="list-disc list-outside ml-4 text-slate-700 space-y-1 text-sm">
+              <div key={proj.title} className="mb-4 print:mb-2 break-inside-avoid">
+                <div className="font-bold print:text-sm">{proj.title}</div>
+                <ul className="list-disc list-outside ml-4 text-slate-700 space-y-1 text-sm print:text-xs print:leading-snug">
                   {proj.bullets.map((line, i) => (
                     <li key={i}>{line}</li>
                   ))}
@@ -178,15 +184,15 @@ export default function ResumeView() {
           </section>
 
           <section className="break-inside-avoid">
-            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4">
+            <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.education}
             </h3>
             <div className="flex flex-wrap gap-8">
               {data.education.map((edu) => (
-                <div key={edu.degree} className="mb-4 w-full sm:w-64 break-inside-avoid">
-                  <div className="font-bold">{edu.degree}</div>
-                  <div className="text-slate-600">{edu.institution}</div>
-                  <div className="text-sm text-slate-500 italic">{edu.period}</div>
+                <div key={edu.degree} className="mb-4 print:mb-2 w-full sm:w-64 break-inside-avoid">
+                  <div className="font-bold print:text-sm">{edu.degree}</div>
+                  <div className="text-slate-600 print:text-xs">{edu.institution}</div>
+                  <div className="text-sm text-slate-500 italic print:text-xs">{edu.period}</div>
                 </div>
               ))}
             </div>

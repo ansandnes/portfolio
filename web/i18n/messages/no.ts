@@ -40,14 +40,27 @@ export const no = {
     at: "hos",
   },
   projects: {
-    title: "Miniapplikasjoner",
-    subtitle: "Interaktive demonstrasjoner av prosjektene mine.",
-    tablist: "Miniapper",
-    tabs: {
-      todo: "Gjøremål",
-      recipe: "Kjøkkenassistent",
-      snake: "Snake",
-      energy: "Strømregning-analyse",
+    title: "Prosjekter",
+    subtitle: "Et utvalg av det jeg har bygget — fra prosjekter fra bunnen av til små eksperimenter.",
+    featured: {
+      heading: "Utvalgte prosjekter",
+      subtitle: "Ting jeg har designet og bygget med hjelp av KI.",
+      goalLabel: "Mål",
+      motivationLabel: "Utviklingsmotivasjon",
+      architectureLabel: "Arkitektur",
+      architectureNote: "Prosjektets arbeidsflytdiagram",
+      viewProject: "Se prosjektet",
+    },
+    miniApps: {
+      heading: "Miniapper",
+      subtitle: "Vibekodede eksperimenter – for moro skyld!",
+      tablist: "Miniapper",
+      tabs: {
+        todo: "Gjøremål",
+        recipe: "Kjøkkenassistent",
+        snake: "Snake",
+        energy: "Strømregning-analyse",
+      },
     },
   },
   footer: {
@@ -66,7 +79,7 @@ export const no = {
   },
   todo: {
     title: "Oppgaveliste",
-    subtitle: "En enkel gjøremålsliste — lagres i nettleseren din.",
+    subtitle: "En enkel gjøremålsliste - den var ny!",
     placeholder: "Legg til en ny oppgave …",
     inputAria: "Ny oppgave",
     addAria: "Legg til oppgave",

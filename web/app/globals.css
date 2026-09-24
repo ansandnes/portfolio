@@ -253,7 +253,7 @@ a:hover {
    the white resume card prints.
 ========================================= */
 @page {
-  margin: 14mm;
+  margin: 8mm;
 }
 
 @media print {

@@ -95,7 +95,7 @@ export const experience: ExperienceItem[] = [
     role: "Bricklayer",
     company: "A. Sandnes Mur og Flis",
     period: "2013 – 2014",
-    description: ["Building bathrooms."],
+    description: ["Building bathrooms.", "Made a lot of mistakes, learned a ton!"],
     techStack: [
       "Running a Business",
       "Customer Service",
@@ -117,6 +117,7 @@ export const experience: ExperienceItem[] = [
       "Bricklaying.",
     ],
     techStack: ["Bricklaying", "Tile Laying", "Bathroom Construction", "Planning"],
+    image: "/images/bricklayer.png",
   },
 ];
 

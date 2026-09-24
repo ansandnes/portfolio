@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LocaleProvider>
             <div className="min-h-screen flex flex-col">
-              <div className="sticky top-0 z-50">
+              <div className="sticky top-0 z-50" data-print-hide>
                 <TopBar />
                 <header className="w-full">
                   <Navbar />

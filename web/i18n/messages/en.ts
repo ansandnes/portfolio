@@ -40,14 +40,27 @@ export const en = {
     at: "at",
   },
   projects: {
-    title: "Mini Applications",
-    subtitle: "Interactive demonstrations of my projects.",
-    tablist: "Mini apps",
-    tabs: {
-      todo: "Todo List",
-      recipe: "Chef Assistant",
-      snake: "Snake",
-      energy: "Energy Analyzer",
+    title: "Projects",
+    subtitle: "A selection of what I've built — from end-to-end projects to small experiments.",
+    featured: {
+      heading: "Featured Projects",
+      subtitle: "Things I designed and built with the assistance of AI.",
+      goalLabel: "Goal",
+      motivationLabel: "Development Motivation",
+      architectureLabel: "Architecture",
+      architectureNote: "Project workflow diagram",
+      viewProject: "View project",
+    },
+    miniApps: {
+      heading: "Mini Apps",
+      subtitle: "Vibecoded experiments - for fun!",
+      tablist: "Mini apps",
+      tabs: {
+        todo: "Todo List",
+        recipe: "Chef Assistant",
+        snake: "Snake",
+        energy: "Energy Analyzer",
+      },
     },
   },
   footer: {
@@ -66,7 +79,7 @@ export const en = {
   },
   todo: {
     title: "Task Manager",
-    subtitle: "A simple to-do list — saved in your browser.",
+    subtitle: "A simple to-do list - it was new!",
     placeholder: "Add a new task...",
     inputAria: "New task",
     addAria: "Add task",
