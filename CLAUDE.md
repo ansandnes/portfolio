@@ -64,6 +64,12 @@ layout/styling, the PDFs go stale until you re-run this script (needs the dev
 server up — e.g. `CV_BASE_URL=http://localhost:3210 npm run cv:pdf` since the
 dev server runs on 3210, not the script's default of 3000).
 
+The PDFs must be **one A4 page**. The page size comes from `@page { size: A4 }`
+in `app/globals.css` (without it Chrome prints US Letter); verify with
+`pdfinfo` (below) that it reports `Pages: 1` and `(A4)` after regenerating.
+The user sometimes edits `content/cv/*.json` directly — if those files show up
+modified, regenerate the PDFs before committing so they don't go stale.
+
 Two real bugs were found and fixed while making the résumé fit one page —
 worth knowing if the PDF layout ever looks wrong again:
 
@@ -89,23 +95,52 @@ bundled poppler tools (`pdfinfo.exe`, `pdftoppm.exe`, `pdftotext.exe`, under
 count, render pages to PNG, or dump text — no new install needed to verify a
 PDF's actual output.
 
-## Session state (as of 2026-09-21)
+## Deployment
 
-Recent work landed but **not yet committed** as of this note — check `git
-status` before assuming a clean tree:
+- GitHub: `origin` = `https://github.com/ansandnes/portfolio.git`, branch
+  `main`. This repo *replaced* an older, unrelated portfolio there (force-push);
+  the old history is preserved under the tag `legacy`. GitHub Pages is
+  **disabled** on purpose — Vercel is the only host.
+- Vercel: project `ansandnes-projects/portfolio`, auto-deploys every push to
+  `main`. Live at https://portfolio-blue-chi-26.vercel.app. Its **Root
+  Directory must be `web`** (it was `client` from the old repo, which made
+  builds fail right after cloning). Deploy status is readable without the
+  Vercel CLI: `gh api repos/ansandnes/portfolio/commits/<sha>/statuses`.
+- The repo root is `vercel link`ed (`.vercel/` and a root `.env.local` holding
+  a short-lived OIDC token — both gitignored). `vercel link` also appends
+  duplicate/over-broad lines (`.env*`) to `.gitignore`; revert those if it's
+  re-run. In Git Bash, `vercel api /v9/...` needs `MSYS_NO_PATHCONV=1` or the
+  path gets rewritten into a Windows file path.
+- `API_KEY_GEMINI` in Vercel (all three environments) was rotated on
+  2026-09-24 and matches `web/.env.local`. Env var changes only take effect on
+  the next deploy (`vercel redeploy <url> --target production`).
 
-- Projects page restructured: a "Featured Projects" section (real, from-scratch
-  work) now sits above a visually secondary "Mini Apps" section. MatTilGaza is
-  the first featured project with a real link/goal/motivation/tech-stack, but
-  its **architecture diagram is still placeholder/dummy content** — the user
-  said they'll provide the real component breakdown later.
-- Experience page: the Ivar S. Moe A/S entry has a circular photo
-  (`public/images/bricklayer.png`); A. Sandnes Mur og Flis got an added bullet.
-- Resume: removed the "Software Developer — Student Assistant..." experience
-  entry per user request; both CV PDFs regenerated and confirmed one page each
-  (see gotchas above for how that was actually achieved).
-- Gemini API usage limits: the user chose to handle this via a **Google-side
-  quota/budget** (set in Google Cloud Console, outside this repo) rather than
-  tightening the in-app rate limiter (`lib/rate-limit.ts`). No code change was
-  made for this — if asked to revisit rate limiting, that in-app limiter is
-  still at its original per-IP setting (10 req/min) and has no global cap.
+## Line endings
+
+There's no `.gitattributes` and `core.autocrlf=false`, and the repo is mixed:
+almost everything is LF, but `web/i18n/messages/en.ts` and `no.ts` are
+**CRLF**. Preserve each file's existing endings — writing files from Python in
+text mode on Windows silently converts to CRLF and turns small edits into
+whole-file diffs. Check with `git diff --stat` vs
+`git diff --stat --ignore-cr-at-eol` before committing.
+
+## Session state (as of 2026-09-24)
+
+Everything is committed and deployed (last: `0a11c52`). Open items:
+
+- MatTilGaza's **architecture diagram is still placeholder content** — the
+  user will provide the real component breakdown later.
+- The MSc thesis card (`content/projects.ts`, `msc-thesis`) has no `url` yet;
+  the user plans to publish an HTML version of the thesis (from Overleaf).
+  Adding `url` makes the "Read the full thesis" button appear.
+- `public/images/projects/direkte-home.png` is a one-off headless-Chrome
+  screenshot of https://direkte-next.vercel.app — it won't track changes to
+  that site. Direkte is the user's separate project (local repo at
+  `../direkte/project`, the one that often occupies port 3000).
+- Modals use a shared native-`<dialog>` component (`components/ui/Modal.tsx`).
+  jsdom has no `showModal()`/`close()`, so `vitest.setup.ts` stubs them; a
+  closed dialog's content is still in the DOM in tests (scope queries with
+  `within(dialog)` or filter out `dialog.contains(el)`).
+- Gemini usage limits are handled via a **Google-side quota/budget** (Google
+  Cloud Console), not the in-app limiter (`lib/rate-limit.ts`, still 10
+  req/min per IP, no global cap).
