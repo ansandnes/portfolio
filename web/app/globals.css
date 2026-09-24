@@ -247,13 +247,27 @@ a:hover {
   opacity: 0.85;
 }
 
+/* Hide a scroll container's scrollbar but keep it scrollable (carousels). */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Stop the page behind an open modal <dialog> from scrolling. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* =========================================
    Print — used to generate the resume PDFs
    from /resume. Hides the app chrome so only
    the white resume card prints.
 ========================================= */
 @page {
-  margin: 8mm;
+  size: A4;
+  margin: 12mm;
 }
 
 @media print {
@@ -282,6 +296,10 @@ a:hover {
   }
 
   .resume-print-card {
+    /* Keep the sidebar tint and accent colours when printed from a browser
+       (browsers drop backgrounds by default). */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
     box-shadow: none !important;
     border-radius: 0 !important;
     padding: 0 !important;

@@ -4,8 +4,9 @@ import React, { useMemo, useState } from "react";
 import { MiniAppType } from "@/app/types";
 import { isEnergyEnabled } from "@/lib/features";
 import { useT } from "@/i18n/LocaleProvider";
-import { featuredProjects } from "@/content/projects";
+import { featuredProjects, projectHighlights } from "@/content/projects";
 import FeaturedProjectCard from "@/components/FeaturedProjectCard";
+import ProjectHighlightCard from "@/components/ProjectHighlightCard";
 import TodoApp from "./_apps/TodoApp";
 import RecipeApp from "./_apps/RecipeApp";
 import SnakeApp from "./_apps/SnakeApp";
@@ -54,6 +55,11 @@ const Projects: React.FC = () => {
           {featuredProjects.map((project) => (
             <FeaturedProjectCard key={project.id} project={project} />
           ))}
+          <div className="grid gap-8 lg:grid-cols-2">
+            {projectHighlights.map((project) => (
+              <ProjectHighlightCard key={project.id} project={project} />
+            ))}
+          </div>
         </div>
       </section>
 

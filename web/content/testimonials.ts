@@ -197,4 +197,10 @@ export const featuredTestimonials: Testimonial[] = FEATURED_TESTIMONIAL_IDS.map(
   return match;
 });
 
+/** Home-page carousel order: the featured ones first, then everyone else. */
+export const homeTestimonials: Testimonial[] = [
+  ...featuredTestimonials,
+  ...testimonials.filter((t) => !FEATURED_TESTIMONIAL_IDS.includes(t.id)),
+];
+
 export default testimonials;

@@ -18,7 +18,8 @@ export default function TestimonialsView() {
         <p className="text-muted text-lg max-w-3xl mx-auto">{t.testimonials.subtitle}</p>
       </div>
 
-      <div className="flex flex-col gap-12">
+      {/* auto-rows-fr: every row as tall as the tallest, so all cards match. */}
+      <div className="grid gap-10 lg:grid-cols-2 auto-rows-fr">
         {testimonials.map((testimonial, index) => (
           <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
         ))}

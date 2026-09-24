@@ -36,11 +36,11 @@ export default function ResumeView() {
 
   return (
     <div className="pb-20 max-w-6xl mx-auto px-6 animate-slide-up print:pt-0 print:pb-0">
-      {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+      {/* Header — screen only; the printed/PDF résumé starts at the card. */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8" data-print-hide>
         <h1 className="text-3xl font-bold text-foreground">{labels.resume}</h1>
 
-        <div className="flex items-center gap-3" data-print-hide>
+        <div className="flex items-center gap-3">
           {/* Language toggle */}
           <div
             role="group"
@@ -174,7 +174,7 @@ export default function ResumeView() {
                         rel="noopener noreferrer"
                         className="text-emerald-600 underline"
                       >
-                        {proj.link.label} {labels.opensNewTab}
+                        {proj.link.label} <span className="print:hidden">{labels.opensNewTab}</span>
                       </a>
                     </li>
                   )}
@@ -187,9 +187,12 @@ export default function ResumeView() {
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.education}
             </h3>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap gap-8 print:gap-6">
               {data.education.map((edu) => (
-                <div key={edu.degree} className="mb-4 print:mb-2 w-full sm:w-64 break-inside-avoid">
+                <div
+                  key={edu.degree}
+                  className="mb-4 print:mb-0 w-full sm:w-64 print:w-auto print:flex-1 break-inside-avoid"
+                >
                   <div className="font-bold print:text-sm">{edu.degree}</div>
                   <div className="text-slate-600 print:text-xs">{edu.institution}</div>
                   <div className="text-sm text-slate-500 italic print:text-xs">{edu.period}</div>

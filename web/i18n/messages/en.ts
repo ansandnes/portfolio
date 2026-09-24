@@ -32,12 +32,25 @@ export const en = {
   experience: {
     title: "Professional Journey",
   },
+  modal: {
+    readMore: "Read more",
+    close: "Close",
+  },
+  carousel: {
+    label: "Testimonials",
+    prev: "Previous testimonial",
+    next: "Next testimonial",
+    /** {n} = 1-based position, {total} = count. */
+    slide: "{n} of {total}",
+    goTo: "Go to testimonial {n}",
+  },
   testimonials: {
     titleLead: "What People",
     titleAccent: "Say",
     subtitle:
       "Feedback from colleagues, managers, and clients I've had the pleasure of working with.",
     at: "at",
+    relationLabel: "How we worked together:",
   },
   projects: {
     title: "Projects",
@@ -50,6 +63,7 @@ export const en = {
       architectureLabel: "Architecture",
       architectureNote: "Project workflow diagram",
       viewProject: "View project",
+      opensNewTab: "(opens in a new tab)",
     },
     miniApps: {
       heading: "Mini Apps",
@@ -79,7 +93,7 @@ export const en = {
   },
   todo: {
     title: "Task Manager",
-    subtitle: "A simple to-do list - it was new!",
+    subtitle: "A simple to-do list - Bet you haven't seen this before!",
     placeholder: "Add a new task...",
     inputAria: "New task",
     addAria: "Add task",

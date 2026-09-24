@@ -5,6 +5,7 @@ import { getResume, RESUME_LANGS, resumes } from "@/content/resume";
 import {
   FEATURED_TESTIMONIAL_IDS,
   featuredTestimonials,
+  homeTestimonials,
   testimonials,
 } from "@/content/testimonials";
 
@@ -24,6 +25,12 @@ describe("testimonials", () => {
   it("featured ids all resolve, in order", () => {
     expect(featuredTestimonials.map((t) => t.id)).toEqual([...FEATURED_TESTIMONIAL_IDS]);
     expect(featuredTestimonials).toHaveLength(FEATURED_TESTIMONIAL_IDS.length);
+  });
+
+  it("home carousel shows every testimonial once, featured first", () => {
+    const ids = homeTestimonials.map((t) => t.id);
+    expect(ids.slice(0, FEATURED_TESTIMONIAL_IDS.length)).toEqual([...FEATURED_TESTIMONIAL_IDS]);
+    expect([...ids].sort()).toEqual(testimonials.map((t) => t.id).sort());
   });
 });
 

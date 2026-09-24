@@ -43,29 +43,32 @@ const ChefAssistant: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <div className="text-center mb-10">
+    <div className="max-w-4xl mx-auto px-0 sm:px-4 py-6 sm:py-10">
+      <div className="text-center mb-8 sm:mb-10">
         <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 mb-4">
           <ChefHat size={32} />
         </div>
-        <h1 className="text-3xl font-extrabold text-foreground mb-2">{t.recipe.title}</h1>
-        <p className="text-lg text-muted max-w-2xl mx-auto">{t.recipe.desc}</p>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-2">{t.recipe.title}</h1>
+        <p className="text-base sm:text-lg text-muted max-w-2xl mx-auto">{t.recipe.desc}</p>
       </div>
 
       <div className="bg-white text-slate-900 shadow-xl rounded-2xl overflow-hidden mb-8">
-        <div className="p-8">
-          <form onSubmit={handleSubmit} className="relative">
+        <div className="p-4 sm:p-8">
+          {/* Stacked on small screens (button below the input); side by side from sm up. */}
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder={t.recipe.placeholder}
-              className="w-full border-2 border-gray-200 rounded-xl px-6 py-4 text-lg text-gray-700 focus:outline-none focus:border-emerald-500 pr-32 transition-colors"
+              aria-label={t.recipe.placeholder}
+              enterKeyHint="go"
+              className="w-full min-w-0 flex-1 border-2 border-gray-200 rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg text-gray-700 focus:outline-none focus:border-emerald-500 transition-colors"
             />
             <button
               type="submit"
-              disabled={loading || !prompt}
-              className="absolute right-2 top-2 bottom-2 bg-emerald-600 text-white px-6 rounded-lg font-medium hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              disabled={loading || !prompt.trim()}
+              className="w-full sm:w-auto shrink-0 bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               {loading ? (
                 <Loader2 className="animate-spin" />
@@ -82,10 +85,10 @@ const ChefAssistant: React.FC = () => {
 
       {result && (
         <div className="bg-white text-slate-900 border border-gray-200 rounded-2xl overflow-hidden animate-fade-in-up">
-          <div className="bg-emerald-50 px-8 py-6 border-b border-emerald-100">
-            <h2 className="text-2xl font-bold text-gray-900">{result.recipeName}</h2>
+          <div className="bg-emerald-50 px-4 sm:px-8 py-4 sm:py-6 border-b border-emerald-100">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{result.recipeName}</h2>
           </div>
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">{t.recipe.instructions}</h3>
               <p className="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-100">

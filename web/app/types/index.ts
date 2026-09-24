@@ -39,6 +39,32 @@ export interface FeaturedProject {
   translations: { en: FeaturedProjectTranslation; no: FeaturedProjectTranslation };
 }
 
+export interface ProjectHighlightTranslation {
+  /** Short category shown above the title, e.g. "Website". */
+  label: string;
+  title: string;
+  tagline: string;
+  /** Heading above the body in the modal, e.g. "About" or "Abstract". */
+  bodyLabel: string;
+  /** Paragraphs shown in the modal; the first one doubles as the card preview. */
+  body: string[];
+  imageAlt?: string;
+  linkLabel?: string;
+}
+
+/**
+ * A secondary project shown as a compact card that opens a modal with the
+ * full write-up. `url` and `image` are optional — a card without an image
+ * previews its first body paragraph instead.
+ */
+export interface ProjectHighlight {
+  id: string;
+  url?: string;
+  image?: { src: string; width: number; height: number };
+  techStack?: string[];
+  translations: { en: ProjectHighlightTranslation; no: ProjectHighlightTranslation };
+}
+
 export interface Testimonial {
   id: number;
   name: string;

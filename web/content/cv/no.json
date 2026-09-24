@@ -23,7 +23,6 @@
       "category": "Generelt",
       "items": ["Datakommunikasjon", "Git", "Programmering", "SQL", "KI-agenter"]
     },
-    { "category": "Cloud / HPC", "items": ["High-Performance Computing (Computerome)"] },
     {
       "category": "Bioinformatikk",
       "items": ["scRNA-seq (10x Genomics, Seurat)", "DGE (DESeq2, EdgeR)"]
@@ -36,8 +35,8 @@
       "company": "Kiona AS",
       "period": "01/26 – Nå",
       "bullets": [
-        "Jeg jobber i skjæringspunktet mellom programvare, data og fysiske tekniske systemer. Jeg arbeider med datakommunikasjon, integrasjoner og feilsøking, og bidrar til å gjøre systemer i bygg og varehandel mer synlige, sammenkoblede og effektive.",
-        "Samarbeid er en stor del av arbeidet mitt. Jeg jobber tett sammen med teknikere for å løse problemer og drive prosjekter fremover."
+        "Jeg jobber i skjæringspunktet mellom programvare, data og fysiske tekniske systemer. Gjennom datakommunikasjon, integrasjoner og feilsøking, bidrar jeg til å kutte matsvinn og gjør systemer i bygg og varehandel mer energieffektive.",
+        "Samarbeid er en stor del av arbeidet mitt. Sammen med et team jobber jeg tett med teknikere for å løse problemer og drive prosjekter fremover."
       ]
     },
     {

@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import { profile } from "@/content/profile";
-import { featuredTestimonials } from "@/content/testimonials";
-import TestimonialCard from "@/components/TestimonialCard";
+import { homeTestimonials } from "@/content/testimonials";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { useT } from "@/i18n/LocaleProvider";
 
 export default function HomePage() {
@@ -43,12 +43,8 @@ export default function HomePage() {
 
       <p className="mt-10 text-sm text-subtle max-w-md">{t.home.tagline}</p>
 
-      {/* Featured testimonials */}
-      <div className="grid gap-12 md:grid-cols-2 w-full max-w-6xl mt-20 md:text-justify">
-        {featuredTestimonials.map((testimonial, index) => (
-          <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
-        ))}
-      </div>
+      {/* Testimonials carousel — featured ones first */}
+      <TestimonialCarousel testimonials={homeTestimonials} className="max-w-6xl mt-20" />
     </section>
   );
 }

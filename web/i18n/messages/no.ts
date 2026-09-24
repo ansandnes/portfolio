@@ -32,12 +32,24 @@ export const no = {
   experience: {
     title: "Yrkesreise",
   },
+  modal: {
+    readMore: "Les mer",
+    close: "Lukk",
+  },
+  carousel: {
+    label: "Referanser",
+    prev: "Forrige referanse",
+    next: "Neste referanse",
+    slide: "{n} av {total}",
+    goTo: "Gå til referanse {n}",
+  },
   testimonials: {
     titleLead: "Hva folk",
     titleAccent: "sier",
     subtitle:
       "Tilbakemeldinger fra kolleger, ledere og kunder jeg har hatt gleden av å jobbe med.",
     at: "hos",
+    relationLabel: "Hvordan vi jobbet sammen:",
   },
   projects: {
     title: "Prosjekter",
@@ -50,6 +62,7 @@ export const no = {
       architectureLabel: "Arkitektur",
       architectureNote: "Prosjektets arbeidsflytdiagram",
       viewProject: "Se prosjektet",
+      opensNewTab: "(åpnes i ny fane)",
     },
     miniApps: {
       heading: "Miniapper",

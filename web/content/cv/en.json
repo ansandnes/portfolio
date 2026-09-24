@@ -20,7 +20,6 @@
   },
   "skills": [
     { "category": "General", "items": ["Data communication", "Git", "Programming", "SQL", "AI agents"] },
-    { "category": "Cloud / HPC", "items": ["High-Performance Computing (Computerome)"] },
     {
       "category": "Bioinformatics",
       "items": ["scRNA-seq (10x Genomics, Seurat)", "DGE (DESeq2, EdgeR)"]
@@ -33,8 +32,8 @@
       "company": "Kiona AS",
       "period": "01/26 – Present",
       "bullets": [
-        "I work where software, data and physical technical systems meet. I work with data communication, integrations, and troubleshooting, helping make systems in buildings and retail more visible, connected, and efficient.",
-        "Collaboration is a big part of my work. I work closely with technicians to solve problems and drive projects forward."
+        "I work where software, data and physical technical systems meet. I work with data communication, integrations, and troubleshooting, helping make systems in buildings and retail be more energy efficient and lower foodwaste.",
+        "Collaboration is a big part of my work. With my team, I work closely with technicians to solve problems and drive projects forward."
       ]
     },
     {

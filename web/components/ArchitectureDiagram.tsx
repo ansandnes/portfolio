@@ -15,10 +15,12 @@ export default function ArchitectureDiagram({
       <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
         {nodes.map((node, i) => (
           <Fragment key={node.id}>
-            <div className="flex-1 min-w-[8rem] bg-card border border-line rounded-lg px-4 py-3 text-center shadow-sm">
-              <div className="text-sm font-semibold text-foreground">{node.label}</div>
+            <div className="flex-1 min-w-[8rem] bg-emerald-500/15 border border-emerald-500/40 rounded-lg px-4 py-3 text-center shadow-sm">
+              <div className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+                {node.label}
+              </div>
               {node.description && (
-                <div className="text-xs text-subtle mt-1">{node.description}</div>
+                <div className="text-xs text-muted mt-1">{node.description}</div>
               )}
             </div>
             {i < nodes.length - 1 && (
