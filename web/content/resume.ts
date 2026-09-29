@@ -3,12 +3,12 @@
  *
  * The text is a file-based CMS: edit `content/cv/en.json` and `content/cv/no.json`
  * (see content/cv/README.md). This module just validates those files and adds
- * the derived `lang` / `pdfPath`. An invalid edit fails the build with a message
- * pointing at the offending field.
+ * the derived `lang` / `pdfPath` / `preview`. An invalid edit fails the build
+ * with a message pointing at the offending field.
  *
- * After editing the JSON, regenerate the downloadable PDFs so they match:
- *   npm run dev            # (or npm run preview)
- *   npm run cv:pdf
+ * The downloadable PDF is *not* generated from this data: it's a separately
+ * designed single-column résumé (plain, linear text so ATS/AI parsers read it
+ * well) dropped into public/assets. See content/cv/README.md.
  */
 
 import { z } from "zod";
@@ -54,6 +54,8 @@ export interface ResumeLabels {
   education: string;
   opensNewTab: string;
   toggleLabel: string;
+  preview: string;
+  previewTitle: string;
 }
 export interface ResumeData {
   lang: ResumeLang;
@@ -67,12 +69,14 @@ export interface ResumeData {
   education: ResumeEducation[];
   /** Path under /public to the downloadable CV for this language. */
   pdfPath: string;
+  /** PNG render of that PDF, shown in the preview modal (phones can't reliably show PDFs inline). */
+  preview: { src: string; width: number; height: number };
 }
 
 const nonEmpty = z.string().trim().min(1);
 const nonEmptyList = z.array(nonEmpty).min(1);
 
-/** Shape of each content/cv/<lang>.json file (everything except lang/pdfPath). */
+/** Shape of each content/cv/<lang>.json file (everything except lang/pdfPath/preview). */
 const cvFileSchema = z.object({
   labels: z.object({
     resume: nonEmpty,
@@ -86,6 +90,8 @@ const cvFileSchema = z.object({
     education: nonEmpty,
     opensNewTab: nonEmpty,
     toggleLabel: nonEmpty,
+    preview: nonEmpty,
+    previewTitle: nonEmpty,
   }),
   profileSummary: nonEmpty.min(20),
   contact: z.object({
@@ -112,6 +118,16 @@ const cvFileSchema = z.object({
     .min(1),
 });
 
+/**
+ * Base name (under /public/assets) of the downloadable résumé per language —
+ * `<name>.pdf` plus a `<name>.png` preview.
+ */
+const DOWNLOADABLE: Record<ResumeLang, string> = {
+  en: "Resume_AndreasSandnes_en",
+  no: "Resume_AndreasSandnes_no",
+};
+const PREVIEW_SIZE = { width: 1241, height: 1755 }; // A4 rendered at 150 dpi
+
 function load(lang: ResumeLang, raw: unknown): ResumeData {
   const parsed = cvFileSchema.safeParse(raw);
   if (!parsed.success) {
@@ -122,7 +138,8 @@ function load(lang: ResumeLang, raw: unknown): ResumeData {
   }
   return {
     lang,
-    pdfPath: `/assets/cv_andreas_sandnes_${lang}.pdf`,
+    pdfPath: `/assets/${DOWNLOADABLE[lang]}.pdf`,
+    preview: { src: `/assets/${DOWNLOADABLE[lang]}.png`, ...PREVIEW_SIZE },
     ...parsed.data,
   };
 }

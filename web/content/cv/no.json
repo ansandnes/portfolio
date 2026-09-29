@@ -3,40 +3,42 @@
     "resume": "CV",
     "download": "Last ned PDF",
     "profile": "Profil",
-    "skills": "Tekniske ferdigheter",
+    "skills": "Ferdigheter",
     "contact": "Kontakt",
     "languages": "Språk",
-    "experience": "Profesjonell erfaring",
-    "projects": "Prosjekter",
+    "experience": "Erfaring",
+    "projects": "Nøkkelprosjekter",
     "education": "Utdanning",
     "opensNewTab": "(åpnes i ny fane)",
-    "toggleLabel": "CV-språk"
+    "toggleLabel": "CV-språk",
+    "preview": "Forhåndsvis nedlastbar versjon",
+    "previewTitle": "Nedlastbar CV"
   },
-  "profileSummary": "Teknisk interessert og samarbeidsorientert ingeniør med erfaring innen datakommunikasjon, systemovervåkning og feilsøking. Har jobbet med analyse av store mengder data og med integrasjon av tekniske anlegg der stabile systemer, tydelig kommunikasjon og raske problemløsninger er avgjørende. Jeg liker å jobbe strukturert og motiveres av å forstå hvordan systemer henger sammen.",
+  "profileSummary": "Teknisk interessert og samarbeidsorientert ingeniør med erfaring innen datakommunikasjon, systemovervåking og feilsøking. Jeg har arbeidet med analyse av store datamengder og integrasjon av tekniske installasjoner, der stabile systemer, tydelig kommunikasjon og rask problemløsning er avgjørende. Jeg trives med å arbeide strukturert og motiveres av å forstå hvordan ulike systemer henger sammen.",
   "contact": {
-    "location": "Trondheim, Norge",
+    "location": "Ottawa, Canada",
     "phone": "+47 97 26 78 84",
     "email": "asandnes92@gmail.com"
   },
   "skills": [
     {
       "category": "Generelt",
-      "items": ["Datakommunikasjon", "Git", "Programmering", "SQL", "KI-agenter"]
+      "items": ["Datakommunikasjon", "Git", "programmering", "SQL", "KI-agenter"]
     },
     {
-      "category": "Bioinformatikk",
-      "items": ["scRNA-seq (10x Genomics, Seurat)", "DGE (DESeq2, EdgeR)"]
+      "category": "Bioinformatikk og analyse",
+      "items": ["DGE (DESeq2, EdgeR)", "Python", "R", "scRNA-seq (10x Genomics, Seurat)", "statistikk"]
     }
   ],
-  "languages": ["Norsk (Morsmål)", "Engelsk (Flytende)", "Dansk (Flytende)"],
+  "languages": ["Norsk (Morsmål)", "Engelsk (Flytende)", "Dansk (Flytende)", "Fransk (Nybegynner)"],
   "experience": [
     {
-      "role": "Teknisk System Spesialist",
+      "role": "Teknisk systemspesialist",
       "company": "Kiona AS",
-      "period": "01/26 – Nå",
+      "period": "01/26 – 01/27",
       "bullets": [
-        "Jeg jobber i skjæringspunktet mellom programvare, data og fysiske tekniske systemer. Gjennom datakommunikasjon, integrasjoner og feilsøking, bidrar jeg til å kutte matsvinn og gjør systemer i bygg og varehandel mer energieffektive.",
-        "Samarbeid er en stor del av arbeidet mitt. Sammen med et team jobber jeg tett med teknikere for å løse problemer og drive prosjekter fremover."
+        "Ledelse av prosjekter der programvare, data og fysiske tekniske systemer møtes for å redusere matsvinn og øke energieffektiviteten i varehandel og industri.",
+        "Samarbeid er en sentral del av arbeidet mitt. Sammen med teamet mitt jobber jeg tett med teknikere for å løse problemer og drive prosjekter fremover."
       ]
     },
     {
@@ -44,34 +46,34 @@
       "company": "National Center for Cancer Immune Therapy (CCIT)",
       "period": "03/25 – 08/25",
       "bullets": [
-        "Utviklet en Python-basert webapplikasjon (Dash/Plotly) for å automatisere håndteringen av data-output fra HLA-typing, integrerte kvalitetskontroll og effektiviserte dataleveransen for immunologisk forskning.",
-        "Automatiserte data-konverteringsflyter i et høytytende Linux-datamiljø, fjernet flaskehalser og akselererte datatilgangen for forskningsteam.",
-        "Analyserte single-cell RNA-seq-data med Seurat for å behandle og tolke komplekse immunologiske datasett, som direkte støttet pågående kreftimmunoterapi-forskning."
+        "Utviklet og implementerte en Python-basert webapplikasjon (Dash-Plotly) for å automatisere håndtering av HLA-typing-resultater; løsningen integrerte kvalitetskontroll og effektiviserte dataleveransen til immunologisk forskning.",
+        "Automatiserte arbeidsflyter for konvertering fra BCL til FASTQ i et høyytelsesdatamiljø (Computerome), noe som eliminerte flaskehalser i prosesseringen og fremskyndet tilgangen til data for forskningsteamene.",
+        "Analyserte single-cell RNA-seq-data ved hjelp av Seurat for å prosessere og tolke komplekse immunologiske datasett, og støttet dermed direkte opp under pågående forskning på immunterapi mot kreft."
       ]
     }
   ],
   "projects": [
     {
-      "title": "Frivillig utvikler — Mat til Gaza (politisk nøytral hjelpeorganisasjon)",
-      "bullets": ["Utvikling og vedlikehold av nettside som fremmer organisasjonens arbeid."],
+      "title": "Frivillig utvikler – Mat til Gaza (politisk nøytral hjelpeorganisasjon)",
+      "bullets": ["Utvikling og vedlikehold av nettstedet som fremmer organisasjonens arbeid."],
       "link": { "label": "mattilgaza.vercel.app", "href": "https://mattilgaza.vercel.app/" }
     },
     {
-      "title": "Masteroppgave — samarbeid med Amgen Research Copenhagen (ARC)",
+      "title": "Masteroppgave – samarbeid med Amgen Research Copenhagen (ARC)",
       "bullets": [
-        "Anvendte statistiske verktøy for å skille falske positive molekyler fra potensielle medisin-kandidater i utvalg fra DNA-kodede bibliotek.",
-        "Sammenlignet statistiske distribusjoner av ulike datasett for å teste kompatibiliteten av forskjellige analysemetoder."
+        "Anvendte statistiske verktøy for å skille falske positive fra potensielle legemiddelkandidater i utvalg fra DNA-kodede biblioteker.",
+        "Sammenlignet statistiske fordelinger i ulike datasett for å teste kompatibiliteten mellom ulike analysemetoder."
       ]
     }
   ],
   "education": [
     {
-      "degree": "Master i Bioinformatikk",
+      "degree": "MSc i Bioinformatikk",
       "institution": "Københavns Universitet (KU)",
       "period": "09/21 – 06/24"
     },
     {
-      "degree": "Bachelor i Biokjemi",
+      "degree": "BSc i Biokjemi",
       "institution": "Københavns Universitet (KU)",
       "period": "09/16 – 02/20"
     }

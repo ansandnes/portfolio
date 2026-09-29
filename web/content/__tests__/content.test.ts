@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { experience } from "@/content/experience";
 import { profile } from "@/content/profile";
@@ -35,20 +37,29 @@ describe("testimonials", () => {
 });
 
 describe("experience", () => {
-  it("has unique ids and required fields", () => {
+  it("has unique ids and required fields in both languages", () => {
     const ids = experience.map((e) => e.id);
     expect(new Set(ids).size).toBe(ids.length);
     for (const e of experience) {
-      expect(e.role.trim()).not.toBe("");
       expect(e.company.trim()).not.toBe("");
-      expect(e.period.trim()).not.toBe("");
-      expect(e.description.length).toBeGreaterThan(0);
+      for (const t of [e.translations.en, e.translations.no]) {
+        expect(t.role.trim()).not.toBe("");
+        expect(t.period.trim()).not.toBe("");
+        expect(t.description.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("keeps the English and Norwegian versions of each job parallel", () => {
+    for (const { translations: t } of experience) {
+      expect(t.no.description).toHaveLength(t.en.description.length);
+      expect(t.no.techStack).toHaveLength(t.en.techStack.length);
     }
   });
 
   it("keeps the CCIT internship and employee roles as separate entries", () => {
     const ccit = experience.filter((e) => e.company.includes("CCIT"));
-    expect(ccit.map((e) => e.period)).toEqual(["05/25 – 08/25", "03/25 – 05/25"]);
+    expect(ccit.map((e) => e.translations.en.period)).toEqual(["05/25 – 08/25", "03/25 – 05/25"]);
   });
 });
 
@@ -65,8 +76,11 @@ describe("resume", () => {
     for (const key of Object.values(r.labels)) expect(key.trim()).not.toBe("");
   });
 
-  it.each(RESUME_LANGS)("[%s] points at its own PDF under /assets", (lang) => {
-    expect(resumes[lang].pdfPath).toBe(`/assets/cv_andreas_sandnes_${lang}.pdf`);
+  it.each(RESUME_LANGS)("[%s] downloadable PDF and its preview image exist", (lang) => {
+    const { pdfPath, preview } = resumes[lang];
+    expect(pdfPath).toMatch(/^\/assets\/.+\.pdf$/);
+    expect(existsSync(join(process.cwd(), "public", pdfPath))).toBe(true);
+    expect(existsSync(join(process.cwd(), "public", preview.src))).toBe(true);
   });
 
   it.each(RESUME_LANGS)("[%s] agrees with the profile on email/phone", (lang) => {

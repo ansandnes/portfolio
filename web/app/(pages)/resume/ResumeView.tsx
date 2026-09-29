@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Download } from "lucide-react";
+import { Download, Eye } from "lucide-react";
 import { RESUME_LANGS, resumes, type ResumeLang } from "@/content/resume";
 import { useLocale } from "@/i18n/LocaleProvider";
+import Modal from "@/components/ui/Modal";
 
 const LANG_LABEL: Record<ResumeLang, string> = { en: "English", no: "Norsk" };
 
@@ -25,6 +27,8 @@ export default function ResumeView() {
     }
   }, [locale, userChose, searchParams]);
 
+  const previewRef = useRef<HTMLDialogElement>(null);
+
   const data = resumes[lang];
   const { labels } = data;
 
@@ -40,7 +44,7 @@ export default function ResumeView() {
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8" data-print-hide>
         <h1 className="text-3xl font-bold text-foreground">{labels.resume}</h1>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Language toggle */}
           <div
             role="group"
@@ -67,11 +71,12 @@ export default function ResumeView() {
             })}
           </div>
 
-          <a
-            href={data.pdfPath}
-            download
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg border-2 border-line-strong px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400"
-          >
+          <button type="button" onClick={() => previewRef.current?.showModal()} className={BUTTON}>
+            <Eye size={16} />
+            {labels.preview}
+          </button>
+
+          <a href={data.pdfPath} download className={BUTTON}>
             <Download size={16} />
             {labels.download}
           </a>
@@ -79,7 +84,7 @@ export default function ResumeView() {
       </div>
 
       {/* Main grid */}
-      <div className="resume-print-card bg-white text-slate-900 rounded-lg shadow-2xl overflow-hidden p-8 sm:p-12 print:p-5 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-8 print:gap-6">
+      <div className="resume-print-card bg-white text-slate-900 rounded-lg shadow-2xl overflow-hidden p-5 sm:p-12 print:p-5 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-8 print:gap-6">
         {/* Left sidebar */}
         <div className="col-span-1 space-y-8 print:space-y-4 bg-gray-100 p-4 rounded-lg">
           <section className="break-inside-avoid">
@@ -138,8 +143,11 @@ export default function ResumeView() {
               {labels.experience}
             </h3>
             {data.experience.map((job) => (
-              <div key={`${job.company}-${job.period}`} className="mb-6 print:mb-2 break-inside-avoid">
-                <div className="flex justify-between items-baseline mb-1">
+              <div
+                key={`${job.company}-${job.period}`}
+                className="mb-6 print:mb-2 break-inside-avoid"
+              >
+                <div className="flex flex-wrap justify-between items-baseline gap-x-4 mb-1">
                   <h4 className="font-bold text-lg print:text-base">{job.role}</h4>
                   <span className="text-sm text-slate-500 italic print:text-xs">{job.period}</span>
                 </div>
@@ -187,7 +195,7 @@ export default function ResumeView() {
             <h3 className="text-lg font-bold uppercase border-b border-slate-300 pb-2 mb-4 print:pb-1 print:mb-2">
               {labels.education}
             </h3>
-            <div className="flex flex-wrap gap-8 print:gap-6">
+            <div className="flex flex-wrap gap-x-8 print:gap-6">
               {data.education.map((edu) => (
                 <div
                   key={edu.degree}
@@ -202,6 +210,29 @@ export default function ResumeView() {
           </section>
         </div>
       </div>
+
+      <Modal ref={previewRef} labelledBy="resume-preview-title">
+        <div className="flex flex-wrap items-center gap-3 pr-10 mb-4">
+          <h2 id="resume-preview-title" className="text-xl font-bold text-foreground">
+            {labels.previewTitle}
+          </h2>
+          <a href={data.pdfPath} download className={BUTTON}>
+            <Download size={16} />
+            {labels.download}
+          </a>
+        </div>
+        <Image
+          src={data.preview.src}
+          width={data.preview.width}
+          height={data.preview.height}
+          alt={labels.previewTitle}
+          sizes="(min-width: 768px) 704px, 100vw"
+          className="w-full h-auto rounded-md border border-line bg-white"
+        />
+      </Modal>
     </div>
   );
 }
+
+const BUTTON =
+  "inline-flex items-center gap-2 whitespace-nowrap rounded-lg border-2 border-line-strong px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400";

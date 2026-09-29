@@ -28,10 +28,14 @@ projects / education entries) — a test checks this.
 
 ## After editing
 
-The website updates on save (dev server). To refresh the **downloadable PDFs** so
-they match:
+The website updates on save (dev server). The **downloadable PDF is separate**:
+it's a hand-designed, single-column résumé (plain linear text, so ATS/AI
+parsers pick up the keywords) — it is *not* generated from these files.
 
-```bash
-npm run dev        # in one terminal (or: npm run preview)
-npm run cv:pdf     # in another — writes web/public/assets/cv_andreas_sandnes_{en,no}.pdf
-```
+To add or replace it (e.g. the Norwegian version):
+
+1. Put the PDF in `web/public/assets/` as `Resume_AndreasSandnes_<lang>.pdf`.
+2. Render a PNG preview next to it (shown in the "Preview" modal — phones can't
+   reliably display PDFs inline), keeping the A4-at-150-dpi size:
+   `pdftoppm -png -r 150 -singlefile Resume_AndreasSandnes_<lang>.pdf Resume_AndreasSandnes_<lang>`
+3. Make sure `DOWNLOADABLE[<lang>]` in `content/resume.ts` points at it.

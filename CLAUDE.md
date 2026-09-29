@@ -40,60 +40,48 @@ All three should stay green; the full test suite runs in a few seconds.
   missing/renamed *keys* — semantic drift (Norwegian text that no longer means
   the same thing as the English) is **not** caught automatically. When editing
   one language's strings, check the other side by hand.
-- Body content (`content/experience.ts`, `content/testimonials.ts`,
-  `content/profile.ts`) is intentionally **English-only** regardless of the
-  site's EN/NO toggle — that toggle only swaps UI chrome, not this content.
-  This is a deliberate, established pattern, not an oversight.
-- Exception: `content/projects.ts` (featured projects) *does* localize its
-  prose, via a `translations: { en, no }` bundle on each `FeaturedProject` —
-  read it with `useLocale()` (not `useT()`). This was introduced to satisfy a
-  specific user request; the two content-localization models coexist
-  intentionally, don't try to unify them.
+- Body content (`content/testimonials.ts`, `content/profile.ts`) is
+  intentionally **English-only** regardless of the site's EN/NO toggle — that
+  toggle only swaps UI chrome, not this content.
+- Exception: `content/projects.ts` (featured projects) and
+  `content/experience.ts` *do* localize their prose, via a
+  `translations: { en, no }` bundle on each item — read it with `useLocale()`
+  (not `useT()`). Introduced on specific user requests; the two
+  content-localization models coexist intentionally, don't try to unify them.
 - `content/cv/en.json` / `content/cv/no.json` are validated by a zod schema in
   `content/resume.ts` at import time — an invalid edit throws at build/dev-server
   start with a message pointing at the offending field. Keep `bullets` arrays
   non-empty (schema enforces `min(1)`) unless you deliberately change the schema.
 
-## Resume PDF generation — non-obvious gotchas
+## Resume page vs. downloadable PDF
 
-`npm run cv:pdf` re-renders `/resume` (both `?lang=` variants) via headless
-Chrome (`scripts/generate-cv-pdfs.mjs`) and writes to
-`public/assets/cv_andreas_sandnes_{en,no}.pdf`. **These are snapshots, not
-generated at request time** — if you edit `content/cv/*.json` or the résumé's
-layout/styling, the PDFs go stale until you re-run this script (needs the dev
-server up — e.g. `CV_BASE_URL=http://localhost:3210 npm run cv:pdf` since the
-dev server runs on 3210, not the script's default of 3000).
+`/resume` renders `content/cv/*.json` in a two-column sidebar layout. The
+**downloadable PDF is a separate, hand-made single-column résumé** (Canva)
+in `public/assets/Resume_AndreasSandnes_<lang>.pdf` — chosen because a linear
+one-column PDF is read better by ATS/AI parsers. It is not generated from the
+JSON (the old headless-Chrome `cv:pdf` generator was removed), so edits to the
+JSON don't change it. A PNG render of it (`.png`, same base name, 1241×1755 =
+A4 @150dpi) is shown in the "Preview downloadable version" modal, because
+mobile browsers can't reliably show PDFs inline. Mapping per language lives in
+`DOWNLOADABLE` in `content/resume.ts`. Steps for replacing a PDF are in
+`content/cv/README.md` — if the user updates a PDF, re-render its PNG too.
 
-The PDFs must be **one A4 page**. The page size comes from `@page { size: A4 }`
-in `app/globals.css` (without it Chrome prints US Letter); verify with
-`pdfinfo` (below) that it reports `Pages: 1` and `(A4)` after regenerating.
-The user sometimes edits `content/cv/*.json` directly — if those files show up
-modified, regenerate the PDFs before committing so they don't go stale.
+This machine has MiKTeX installed, whose bundled poppler tools (`pdfinfo.exe`,
+`pdftoppm.exe`, `pdftotext.exe`, under
+`C:\Users\asand\AppData\Local\Programs\MiKTeX\miktex\bin\x64\`) can check
+page count, render pages to PNG, or dump text — no new install needed.
 
-Two real bugs were found and fixed while making the résumé fit one page —
-worth knowing if the PDF layout ever looks wrong again:
+The print CSS (`@page { size: A4 }`, `print:` variants, `header { display:
+none }` in print) still exists for printing `/resume` from a browser. Note
+that `md:`/`sm:` breakpoints don't reliably apply in print rendering — use
+`print:` variants for print layout.
 
-1. **Tailwind's `md:`/`sm:` breakpoints do not reliably apply during
-   headless-Chrome print rendering.** The tool's default viewport is narrower
-   than 768px, so `md:grid-cols-3` silently fell back to `grid-cols-1`,
-   stacking the résumé into one long column and roughly doubling its printed
-   height — with no error, just a mysteriously tall PDF. Fix: use Tailwind's
-   `print:` variant (e.g. `print:grid-cols-3`) for anything whose PDF layout
-   must not depend on viewport width. Don't rely on `md:`/`sm:` alone for
-   layout that has to survive print rendering.
-2. **`[data-print-hide]` only hides the element it's actually attached to.**
-   `TopBar` rendered as a sibling *before* the semantic `<header>` tag in
-   `app/layout.tsx`, so the print rule `header { display: none }` never caught
-   it, and it leaked into the PDF (wasted vertical space at the top of every
-   page). Any new global/sticky chrome added to the root layout needs its own
-   `data-print-hide` (or to live inside `<header>`/`<footer>`) to be excluded
-   from print.
+## Mobile
 
-To debug PDF layout issues locally: this machine has MiKTeX installed, whose
-bundled poppler tools (`pdfinfo.exe`, `pdftoppm.exe`, `pdftotext.exe`, under
-`C:\Users\asand\AppData\Local\Programs\MiKTeX\miktex\bin\x64\`) can check page
-count, render pages to PNG, or dump text — no new install needed to verify a
-PDF's actual output.
+The user cares that every page works at phone widths. Check at ~375px for
+horizontal overflow (`document.documentElement.scrollWidth` vs viewport) —
+e.g. by driving headless Chrome over CDP; the home page's testimonial carousel
+intentionally has off-screen slides inside its own scroll container.
 
 ## Deployment
 

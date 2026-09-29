@@ -3,15 +3,20 @@
 
 export type { RecipeResponse } from "@/lib/schemas";
 
-export interface ExperienceItem {
-  id: string;
+/** The parts of a job that read as prose — translated per locale. */
+export interface ExperienceTranslation {
   role: string;
-  company: string;
   period: string;
   description: string[];
   techStack: string[];
+}
+
+export interface ExperienceItem {
+  id: string;
+  company: string;
   /** Path under /public to a photo shown as a circular thumbnail on the card. */
   image?: string;
+  translations: { en: ExperienceTranslation; no: ExperienceTranslation };
 }
 
 export interface ArchitectureNode {

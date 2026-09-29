@@ -3,36 +3,38 @@
     "resume": "Resume",
     "download": "Download PDF",
     "profile": "Profile",
-    "skills": "Technical skills",
+    "skills": "Skills",
     "contact": "Contact",
     "languages": "Languages",
     "experience": "Professional experience",
-    "projects": "Projects",
+    "projects": "Key projects",
     "education": "Education",
     "opensNewTab": "(opens new tab)",
-    "toggleLabel": "Resume language"
+    "toggleLabel": "Resume language",
+    "preview": "Preview downloadable version",
+    "previewTitle": "Downloadable resume"
   },
   "profileSummary": "Technically curious and collaborative engineer with experience in data communication, systems monitoring, and troubleshooting. I have worked with the analysis of large volumes of data and with the integration of technical installations, where stable systems, clear communication, and fast problem-solving are essential. I like to work in a structured way and am motivated by understanding how systems fit together.",
   "contact": {
-    "location": "Trondheim, Norway",
+    "location": "Ottawa, Canada",
     "phone": "+47 97 26 78 84",
     "email": "asandnes92@gmail.com"
   },
   "skills": [
     { "category": "General", "items": ["Data communication", "Git", "Programming", "SQL", "AI agents"] },
     {
-      "category": "Bioinformatics",
-      "items": ["scRNA-seq (10x Genomics, Seurat)", "DGE (DESeq2, EdgeR)"]
+      "category": "Bioinformatics & Analysis",
+      "items": ["DGE (DESeq2, EdgeR)", "Python", "R", "scRNA-seq (10x Genomics, Seurat)", "Statistics"]
     }
   ],
-  "languages": ["Norwegian (Native)", "English (Fluent)", "Danish (Fluent)"],
+  "languages": ["Norwegian (Native)", "English (Fluent)", "Danish (Fluent)", "French (Beginner)"],
   "experience": [
     {
       "role": "Technical System Specialist",
       "company": "Kiona AS",
-      "period": "01/26 – Present",
+      "period": "01/26 – 01/27",
       "bullets": [
-        "I work where software, data and physical technical systems meet. I work with data communication, integrations, and troubleshooting, helping make systems in buildings and retail be more energy efficient and lower foodwaste.",
+        "Managing projects where software, data, and physical technical systems meet to lower foodwaste, and increase energy efficiency in retail and industry.",
         "Collaboration is a big part of my work. With my team, I work closely with technicians to solve problems and drive projects forward."
       ]
     },
@@ -41,9 +43,9 @@
       "company": "National Center for Cancer Immune Therapy (CCIT)",
       "period": "03/25 – 08/25",
       "bullets": [
-        "Built a Python web application (Dash/Plotly) to automate the handling of HLA-typing data output, integrating quality control and streamlining data delivery for immunology research.",
-        "Automated data-conversion workflows in a high-performance Linux environment, removing bottlenecks and accelerating data access for research teams.",
-        "Analysed single-cell RNA-seq data with Seurat to process and interpret complex immunology datasets, directly supporting ongoing cancer immunotherapy research."
+        "Developed and deployed a Python-based web application (Dash-Plotly) to automate a custom HLA typing output handler, integrating quality control and streamlining data delivery for immunology research.",
+        "Automated BCL-to-FASTQ conversion workflows in a high-performance computing environment (Computerome), eliminating processing bottlenecks and accelerating data availability for research teams.",
+        "Analyzed single-cell RNA-seq data using Seurat to process and interpret complex immunology datasets, directly supporting ongoing cancer immune therapy research."
       ]
     }
   ],
@@ -65,13 +67,13 @@
   ],
   "education": [
     {
-      "degree": "Master's in Bioinformatics",
-      "institution": "University of Copenhagen (KU)",
+      "degree": "MSc in Bioinformatics",
+      "institution": "The University of Copenhagen (UCPH)",
       "period": "09/21 – 06/24"
     },
     {
-      "degree": "Bachelor's in Biochemistry",
-      "institution": "University of Copenhagen (KU)",
+      "degree": "BSc in Biochemistry",
+      "institution": "The University of Copenhagen (UCPH)",
       "period": "09/16 – 02/20"
     }
   ]
