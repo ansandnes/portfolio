@@ -30,7 +30,10 @@ export type TextSegment = string | { text: string; href: string };
 
 /** The parts of a featured project that read as prose — translated per locale. */
 export interface FeaturedProjectTranslation {
+  /** Short category shown above the title on the card, e.g. "Website". */
+  label: string;
   tagline: string;
+  imageAlt: string;
   goal: string;
   motivation: TextSegment[];
   architecture: ArchitectureNode[];
@@ -40,6 +43,7 @@ export interface FeaturedProject {
   id: string;
   name: string;
   url: string;
+  image: { src: string; width: number; height: number };
   techStack: string[];
   translations: { en: FeaturedProjectTranslation; no: FeaturedProjectTranslation };
 }

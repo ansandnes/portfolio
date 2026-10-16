@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import type { ProjectHighlight } from "@/app/types";
@@ -8,8 +8,17 @@ import Modal from "@/components/ui/Modal";
 import { TagRow } from "@/components/ui/Tag";
 import { useLocale } from "@/i18n/LocaleProvider";
 
-/** Compact project card; clicking it opens the full write-up in a modal. */
-export default function ProjectHighlightCard({ project }: { project: ProjectHighlight }) {
+/**
+ * Compact project card; clicking it opens the full write-up in a modal.
+ * `children` are extra modal sections rendered after the body.
+ */
+export default function ProjectHighlightCard({
+  project,
+  children,
+}: {
+  project: ProjectHighlight;
+  children?: ReactNode;
+}) {
   const { locale, t } = useLocale();
   const tr = project.translations[locale];
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -117,6 +126,7 @@ export default function ProjectHighlightCard({ project }: { project: ProjectHigh
             <p key={i}>{paragraph}</p>
           ))}
         </div>
+        {children}
       </Modal>
     </article>
   );

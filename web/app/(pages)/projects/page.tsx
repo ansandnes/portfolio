@@ -51,15 +51,13 @@ const Projects: React.FC = () => {
           <h2 className="text-xl font-bold text-foreground">{t.projects.featured.heading}</h2>
           <p className="text-muted text-sm mt-1">{t.projects.featured.subtitle}</p>
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="grid gap-8 lg:grid-cols-2">
           {featuredProjects.map((project) => (
             <FeaturedProjectCard key={project.id} project={project} />
           ))}
-          <div className="grid gap-8 lg:grid-cols-2">
-            {projectHighlights.map((project) => (
-              <ProjectHighlightCard key={project.id} project={project} />
-            ))}
-          </div>
+          {projectHighlights.map((project) => (
+            <ProjectHighlightCard key={project.id} project={project} />
+          ))}
         </div>
       </section>
 

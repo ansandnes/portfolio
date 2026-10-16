@@ -11,10 +11,13 @@ export const featuredProjects: FeaturedProject[] = [
     id: "mattilgaza",
     name: "Mat Til Gaza",
     url: "https://mattilgaza.vercel.app",
+    image: { src: "/images/projects/mattilgaza-home.png", width: 1440, height: 900 },
     techStack: ["Sanity", "Next.js", "React", "Tailwind CSS"],
     translations: {
       en: {
+        label: "Website",
         tagline: "A donation site connecting givers to families in Gaza.",
+        imageAlt: "The Mat Til Gaza home page, with a call to donate through Vipps",
         goal:
           "The goal of Mat Til Gaza is simple: raise donations for families in Gaza. We have a trusted network on the ground there who help the families around them, and we wanted to contribute to that. Click through to learn more about the work that's been done.",
         motivation: [
@@ -34,7 +37,9 @@ export const featuredProjects: FeaturedProject[] = [
         ],
       },
       no: {
+        label: "Nettsted",
         tagline: "Et donasjonsnettsted som knytter givere til familier i Gaza.",
+        imageAlt: "Forsiden til Mat Til Gaza, med en oppfordring til å gi via Vipps",
         goal:
           "Målet med Mat Til Gaza er enkelt: samle inn donasjoner til familier i Gaza. Vi har et nettverk vi stoler på i Gaza, som hjelper familiene rundt seg, og det ønsket vi å bidra til. Klikk deg inn for å lære mer om arbeidet som er gjort.",
         motivation: [
@@ -73,6 +78,42 @@ const THESIS_ABSTRACT = [
  * card opens a modal with the full write-up.
  */
 export const projectHighlights: ProjectHighlight[] = [
+  {
+    id: "health-of-norway",
+    url: "https://health-of-norway.vercel.app",
+    image: { src: "/images/projects/health-of-norway-home.png", width: 1440, height: 900 },
+    techStack: ["Astro", "TypeScript", "FHI Statistikk API", "Vercel"],
+    translations: {
+      en: {
+        label: "Data website",
+        title: "Health of Norway",
+        tagline:
+          "What people in Norway die of, how it has changed since 1951, and where counties and municipalities stand out.",
+        bodyLabel: "About",
+        body: [
+          "Health of Norway is an explorer for official cause-of-death statistics from the Norwegian Institute of Public Health's Cause of Death Registry (Dødsårsaksregisteret). Pick an area, year, age group and sex to see what people die of, follow each cause's trend over time, and compare counties — all from open, published data, with nothing modelled or imputed.",
+          "The “leads” pages flag counties and municipalities whose death rates stand out from Norway's more than chance would explain. Each result is judged against how much the other areas vary (a random-effects funnel plot) and corrected for the thousands of comparisons made (Benjamini–Hochberg false discovery rate). Every lead comes with the numbers behind it, a chart, a checklist of ordinary explanations to rule out — coding changes, small numbers, how deaths are recorded — and questions to ask. A lead is a reason to look closer, not a finding.",
+          "The data is pulled from the FHI Statistikk open API and stored as dated, checksummed snapshots, and a sources page documents exactly which tables were used, when they were retrieved and the known breaks in the series.",
+        ],
+        imageAlt: "The Health of Norway home page, with filters and headline figures for deaths in Norway",
+        linkLabel: "Visit Health of Norway",
+      },
+      no: {
+        label: "Datanettsted",
+        title: "Health of Norway",
+        tagline:
+          "Hva folk i Norge dør av, hvordan det har endret seg siden 1951, og hvor fylker og kommuner skiller seg ut.",
+        bodyLabel: "Om prosjektet",
+        body: [
+          "Health of Norway er et verktøy for å utforske offisiell dødsårsaksstatistikk fra Folkehelseinstituttets Dødsårsaksregister. Velg område, år, aldersgruppe og kjønn for å se hva folk dør av, følg utviklingen for hver dødsårsak over tid og sammenlign fylker — alt fra åpne, publiserte data, uten modellering eller anslåtte verdier.",
+          "«Leads»-sidene peker ut fylker og kommuner der dødsratene skiller seg mer fra Norge enn tilfeldigheter kan forklare. Hvert resultat vurderes mot hvor mye de andre områdene varierer (et «random effects»-traktplott), og korrigeres for de tusenvis av sammenligningene som gjøres (Benjamini–Hochberg-kontroll av falske funn). Hvert funn kommer med tallene bak, en graf, en sjekkliste over vanlige forklaringer som må utelukkes — kodeendringer, små tall, hvordan dødsfall registreres — og spørsmål å stille. Et funn er en grunn til å se nærmere etter, ikke en konklusjon.",
+          "Dataene hentes fra FHI Statistikks åpne API og lagres som daterte øyeblikksbilder med sjekksummer, og en egen kildeside dokumenterer nøyaktig hvilke tabeller som er brukt, når de ble hentet og kjente brudd i tidsseriene.",
+        ],
+        imageAlt: "Forsiden til Health of Norway, med filtre og nøkkeltall for dødsfall i Norge",
+        linkLabel: "Besøk Health of Norway",
+      },
+    },
+  },
   {
     id: "direkte",
     url: "https://direkte-next.vercel.app",
