@@ -74,6 +74,49 @@ const THESIS_ABSTRACT = [
 ];
 
 /**
+ * Highlight-style cards rendered *before* the featured projects, so they
+ * take the first slot in the grid (top-left on large screens).
+ */
+export const leadingProjectHighlights: ProjectHighlight[] = [
+  {
+    id: "retail-hacker-tracker",
+    url: "https://retail-hacker-tracker.vercel.app",
+    image: { src: "/images/projects/retail-hacker-tracker-home.png", width: 1440, height: 900 },
+    techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    translations: {
+      en: {
+        label: "OSINT tracker",
+        title: "Coldchain",
+        tagline:
+          "An interactive tracker of the 2026 refrigeration sabotage campaign against supermarkets, cold stores and blood banks.",
+        bodyLabel: "About",
+        body: [
+          "In 2026, attackers remotely forced supermarket, cold-store and blood-plasma refrigeration into defrost or heat mode overnight — mostly through internet-exposed refrigeration controllers and contractor remote-access links. Coldchain compiles the incidents from news reporting and open-source research into one place: an interactive 3D globe where each point shows where it happened, what was hit, and what links it to the others.",
+          "Incidents can be filtered by wave, sector and vendor, and connected by shared traits — same night, same vendor, contractor access, same chain. A timeline follows disclosures, advisories and official responses, a link-analysis matrix compares the common denominators across countries, and an attribution section weighs the candidate actors with supporting points and caveats. Every claim is backed by a numbered list of sources.",
+        ],
+        imageAlt:
+          "The Coldchain tracker, with headline figures, a 3D globe of incidents across Europe and a list of recent attacks",
+        linkLabel: "Visit Coldchain",
+      },
+      no: {
+        label: "OSINT-tracker",
+        title: "Coldchain",
+        tagline:
+          "En interaktiv oversikt over sabotasjekampanjen mot kjølesystemer i 2026 — rettet mot dagligvarebutikker, kjølelagre og blodbanker.",
+        bodyLabel: "Om prosjektet",
+        body: [
+          "I 2026 fjernstyrte angripere kjøleanlegg i dagligvarebutikker, kjølelagre og blodplasmalagre over i avriming eller varmemodus om natten — for det meste via kjølekontrollere eksponert mot internett og fjerntilgang hos servicefirmaer. Coldchain samler hendelsene fra nyhetsdekning og åpne kilder på ett sted: en interaktiv 3D-globus der hvert punkt viser hvor det skjedde, hva som ble rammet og hva som knytter det til de andre.",
+          "Hendelsene kan filtreres etter bølge, sektor og leverandør, og kobles sammen etter felles trekk — samme natt, samme leverandør, fjerntilgang via servicefirma, samme kjede. En tidslinje følger varsler, sikkerhetsråd og offisielle reaksjoner, en lenkeanalyse sammenligner fellesnevnerne på tvers av land, og en egen del om attribusjon vurderer mulige aktører med argumenter for og forbehold. Alle påstander er underbygget av en nummerert kildeliste.",
+        ],
+        imageAlt:
+          "Coldchain-trackeren, med nøkkeltall, en 3D-globus over hendelser i Europa og en liste over nylige angrep",
+        linkLabel: "Besøk Coldchain",
+      },
+    },
+  },
+];
+
+/**
  * Smaller projects shown side by side under the featured projects. Each
  * card opens a modal with the full write-up.
  */

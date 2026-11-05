@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import { MiniAppType } from "@/app/types";
 import { isEnergyEnabled } from "@/lib/features";
 import { useT } from "@/i18n/LocaleProvider";
-import { featuredProjects, projectHighlights } from "@/content/projects";
+import { featuredProjects, leadingProjectHighlights, projectHighlights } from "@/content/projects";
 import FeaturedProjectCard from "@/components/FeaturedProjectCard";
 import ProjectHighlightCard from "@/components/ProjectHighlightCard";
 import TodoApp from "./_apps/TodoApp";
@@ -52,6 +52,9 @@ const Projects: React.FC = () => {
           <p className="text-muted text-sm mt-1">{t.projects.featured.subtitle}</p>
         </div>
         <div className="grid gap-8 lg:grid-cols-2">
+          {leadingProjectHighlights.map((project) => (
+            <ProjectHighlightCard key={project.id} project={project} />
+          ))}
           {featuredProjects.map((project) => (
             <FeaturedProjectCard key={project.id} project={project} />
           ))}
